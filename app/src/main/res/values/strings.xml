@@ -2,4 +2,7 @@
     <string name="app_name">FinanceTracker</string>
     <string name="filter_view_finance_tracker">FinanceTracking</string>
     <string name="balance">Баланс</string>
+    <string name="finance_tracker">Finance Tracker</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
 </resources>
