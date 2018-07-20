@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityMain">
+        <activity android:name=".activities.ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,8 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivitySettings" />
-        <activity android:name=".ActivityAbout"></activity>
+        <activity android:name=".activities.ActivitySettings" />
+        <activity android:name=".activities.ActivityAbout"></activity>
     </application>
 
 </manifest>

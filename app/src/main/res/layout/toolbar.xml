@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="?attr/actionBarSize"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:title="@string/finance_tracker"
     android:background="@color/colorPrimary"
     app:titleTextColor="@android:color/white"/>
