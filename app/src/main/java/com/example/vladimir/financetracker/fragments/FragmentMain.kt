@@ -25,7 +25,7 @@ class FragmentMain : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mFragmentToolbar = view.findViewById(R.id.fragment_main_toolbar)
-        fragment_main_txt_balance_rub_value.text = resources.getString(R.string.balance_message, Utils.formatNumber(MoneyOperations.translateCurrency(0.016)), resources.getString(R.string.rub))
+        fragment_main_txt_balance_rub_value.text = resources.getString(R.string.balance_message, Utils.formatNumber(MoneyOperations.convertCurrency(0.016)), resources.getString(R.string.rub))
         fragment_main_txt_balance_usd_value.text = resources.getString(R.string.balance_message, Utils.formatNumber(MoneyOperations.getBalance()), resources.getString(R.string.usd))
         initToolbar()
     }
