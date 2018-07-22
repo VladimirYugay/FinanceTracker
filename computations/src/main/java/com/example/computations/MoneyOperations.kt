@@ -9,31 +9,18 @@ class MoneyOperations{
     companion object {
 
         //Основная валюта - доллар, все будем хранить там, при надобности - конвертим
-        fun getBalance(): Double{
-            //Достанем из базы или сети лист с объектами Operation
-            val operations = arrayListOf<Operation>()
-            operations.add(Operation("BUY", 150.0, "USD"))
-            operations.add(Operation("BUY", 150.0, "USD"))
-            operations.add(Operation("BUY", 150.0, "USD"))
-            operations.add(Operation("BUY", 150.0, "USD"))
-            var balance = 0.0
+        fun getBalance(balance: Double, operations: ArrayList<Operation>): Double{
+            var updatedBalance = balance
             for(operation in operations){
-                balance += getOperationValue(operation)
+                updatedBalance -= operation.value
             }
-            return balance
+            return updatedBalance
         }
 
         //Передаем условный множитель, т.е. е
-        fun convertCurrency(multiplier: Double): Double{
-            return getBalance() / multiplier
+        fun convertCurrency(currentBalance: Double, multiplier: Double): Double{
+            return currentBalance / multiplier
         }
 
-        private fun getOperationValue(operation: Operation): Double{
-            return if(operation.type == "BUY"){
-                - operation.value
-            }else{
-                operation.value
-            }
-        }
     }
 }
