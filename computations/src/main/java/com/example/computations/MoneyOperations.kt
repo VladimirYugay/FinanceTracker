@@ -1,14 +1,20 @@
 package com.example.computations
 
+import android.media.VolumeShaper
+import java.text.DecimalFormat
+import kotlin.math.round
+
 class MoneyOperations{
     companion object {
-        fun getBalanceInRoubles(): Double{
-            return 2500.0
+
+        //Основная валюта - доллар
+        fun getBalance(): Double{
+            return 250.0
         }
 
-        fun getBalanceInDollars(): Double{
-            return 2500.0 / 60
+        //Передаем условный множитель, т.е. е
+        fun translateCurrency(multiplier: Double): Double{
+            return getBalance() / multiplier
         }
-
     }
 }
