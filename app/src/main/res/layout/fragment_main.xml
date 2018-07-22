@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/fragment_main_toolbar"/>
+
+    <TextView
+        android:id="@+id/fragment_main_txt_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/regular_text_size"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_main_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/your_balance"
+        android:padding="@dimen/text_view_regular_padding"/>
+    
+    <TextView
+        android:id="@+id/fragment_main_txt_balance_rub_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headline_text_size"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/text_view_regular_padding"/>
+
+    <TextView
+        android:id="@+id/fragment_main_txt_balance_usd_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headline_text_size"
+        android:maxLines="1"
+        android:textColor="@android:color/holo_green_light"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance_rub_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/text_view_regular_padding"/>
+
+</android.support.constraint.ConstraintLayout>

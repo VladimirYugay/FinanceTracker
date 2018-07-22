@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">FinanceTracker</string>
+    <string name="app_name">Трекер Финансов</string>
+    <string name="filter_view_finance_tracker">FinanceTracking</string>
+    <string name="balance">Баланс</string>
+    <string name="finance_tracker">Трекер Финансов</string>>
+
+    <string name="about_app">О приложении</string>
+    <string name="settings">Настройки</string>
+
+    <string name="rub">RUB</string>
+    <string name="usd">USD</string>
+    <string name="balance_message">%1$s %2$s</string>
+    <string name="your_balance">Ваш баланс</string>
 </resources>
