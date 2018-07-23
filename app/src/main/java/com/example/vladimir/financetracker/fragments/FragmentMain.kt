@@ -22,10 +22,10 @@ class FragmentMain : Fragment(){
 
     private lateinit var mFragmentToolbar: Toolbar
     private lateinit var mIChangeFragmentListener: IChangeFragmentListener
-    public lateinit var mTextRoubles: TextView
-    public lateinit var mTextDollars: TextView
-    public var BALANCE = 1000.0
-    public var operations: ArrayList<Operation> = ArrayList()
+    private lateinit var mTextRoubles: TextView
+    private lateinit var mTextDollars: TextView
+    private var BALANCE = 1000.0
+    private var operations: ArrayList<Operation> = ArrayList()
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

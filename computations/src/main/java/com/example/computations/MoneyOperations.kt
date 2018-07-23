@@ -8,7 +8,7 @@ import kotlin.math.round
 class MoneyOperations{
     companion object {
 
-        //Основная валюта - доллар, все будем хранить там, при надобности - конвертим
+        //Основная валюта - доллар, все будем хранить в долларах, при надобности - конвертим
         fun getBalance(balance: Double, operations: ArrayList<Operation>): Double{
             var updatedBalance = balance
             for(operation in operations){
