@@ -12,12 +12,16 @@ class MoneyOperations{
         fun getBalance(balance: Double, operations: ArrayList<Operation>): Double{
             var updatedBalance = balance
             for(operation in operations){
-                updatedBalance -= operation.value
+                if(operation.currency == "RUB"){
+                    updatedBalance -= operation.value / 60
+                }else{
+                    updatedBalance -= operation.value
+                }
             }
             return updatedBalance
         }
 
-        //Передаем условный множитель, т.е. е
+        //Передаем условный множитель
         fun convertCurrency(currentBalance: Double, multiplier: Double): Double{
             return currentBalance / multiplier
         }
