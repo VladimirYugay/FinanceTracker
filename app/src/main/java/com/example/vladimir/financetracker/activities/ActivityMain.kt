@@ -26,7 +26,7 @@ class ActivityMain : AppCompatActivity(), IChangeFragmentListener {
     }
 
     override fun loadFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment).addToBackStack(fragment.javaClass.name).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(fragment.javaClass.name).commit()
     }
 
 }

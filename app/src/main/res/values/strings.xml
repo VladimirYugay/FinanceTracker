@@ -11,9 +11,16 @@
     <string name="usd">USD</string>
     <string name="balance_message">%1$s %2$s</string>
     <string name="your_balance">Ваш баланс</string>
-    <string name="add_expenditure">Добавьте Покупку</string>
+    <string name="add_expenditure">Добавьте Расход</string>
     <string name="category">Категория</string>
     <string name="value">Стоимость</string>
     <string name="submit">Подтвердить</string>
     <string name="cancel">Отмена</string>
+    <string name="action_bar_spinner">Спиннер</string>
+
+    <string-array name="currency_array">
+        <item>" "</item>
+        <item>USD</item>
+        <item>RUB</item>
+    </string-array>
 </resources>

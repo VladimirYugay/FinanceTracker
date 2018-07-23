@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/toolbar"
+        android:id="@+id/fragment_expenditure_toolbar"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/fragment_expenditure_type_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_expenditure_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
@@ -30,10 +32,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_expenditure_type_label"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_expenditure_type_label">
+        android:layout_marginTop="16dp">
         <EditText
             android:id="@+id/fragment_expenditure_value_edit_text"
             android:layout_width="match_parent"
@@ -41,6 +42,7 @@
             android:inputType="number"
             android:hint="@string/value" />
     </android.support.design.widget.TextInputLayout>
+
 
 
     <android.support.design.widget.FloatingActionButton
