@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.fragments.FragmentMain
+import com.example.vladimir.financetracker.interfaces.IChangeFragmentListener
 
-class ActivityMain : AppCompatActivity() {
+class ActivityMain : AppCompatActivity(), IChangeFragmentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +18,15 @@ class ActivityMain : AppCompatActivity() {
         }
     }
 
-    fun loadFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount == 1){
+            finish()
+        }
+        super.onBackPressed()
+    }
+
+    override fun loadFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(fragment.javaClass.name).commit()
     }
 
 }
