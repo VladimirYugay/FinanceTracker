@@ -29,7 +29,11 @@ class ActivityMain : AppCompatActivity() {
 
 
     private fun loadFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(fragment.javaClass.name).commit()
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
+                .replace(R.id.container, fragment)
+                .addToBackStack(fragment.javaClass.name)
+                .commit()
     }
 
     private fun loadFragmentWithoutBackStack(fragment: Fragment){
