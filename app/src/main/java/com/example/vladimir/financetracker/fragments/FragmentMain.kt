@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.computations.MoneyOperations
 import com.example.computations.entity.Operation
-import com.example.vladimir.financetracker.FlowConstants
+import com.example.vladimir.financetracker.NavigationConstants
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.activities.ActivityAbout
 import com.example.vladimir.financetracker.activities.ActivityMain
@@ -45,7 +45,7 @@ class FragmentMain : Fragment() {
     private fun initComponentsListeners() {
         fragment_main_add_expenditure_button.setOnClickListener {
             val intent = Intent(context, ActivityMain::class.java)
-            intent.putExtra(FlowConstants.LOAD_FRAGMENT, FlowConstants.LOAD_EXPENDITURE_FRAGMENT)
+            intent.putExtra(NavigationConstants.DESTINATION_FRAGMENT, NavigationConstants.EXPENDITURE_FRAGMENT)
             startActivity(intent)
         }
     }

@@ -4,7 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.example.vladimir.financetracker.FlowConstants
+import com.example.vladimir.financetracker.NavigationConstants
+import com.example.vladimir.financetracker.Navigator
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.fragments.FragmentExpenditure
 import com.example.vladimir.financetracker.fragments.FragmentMain
@@ -23,12 +24,7 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        when(intent?.getStringExtra(FlowConstants.LOAD_FRAGMENT)){
-            FlowConstants.LOAD_EXPENDITURE_FRAGMENT -> loadFragment(FragmentExpenditure())
-            else -> {
-
-            }
-        }
+        loadFragment(Navigator().navigate(intent))
     }
 
 
