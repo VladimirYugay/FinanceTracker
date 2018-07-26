@@ -12,9 +12,7 @@ import com.example.computations.MoneyOperations
 import com.example.computations.entity.Operation
 import com.example.vladimir.financetracker.NavigationConstants
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.activities.ActivityAbout
 import com.example.vladimir.financetracker.activities.ActivityMain
-import com.example.vladimir.financetracker.activities.ActivitySettings
 import com.example.vladimir.financetracker.formatNumber
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -44,9 +42,7 @@ class FragmentMain : Fragment() {
 
     private fun initComponentsListeners() {
         fragment_main_add_expenditure_button.setOnClickListener {
-            val intent = Intent(context, ActivityMain::class.java)
-            intent.putExtra(NavigationConstants.DESTINATION_FRAGMENT, NavigationConstants.EXPENDITURE_FRAGMENT)
-            startActivity(intent)
+            goTo(NavigationConstants.EXPENDITURE_FRAGMENT)
         }
     }
 
@@ -56,15 +52,21 @@ class FragmentMain : Fragment() {
         mToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings -> {
-                    startActivity(Intent(context, ActivitySettings::class.java))
+                    goTo(NavigationConstants.SETTINGS_FRAGMENT)
                     true
                 }
                 R.id.action_about -> {
-                    startActivity(Intent(context, ActivityAbout::class.java))
+                    goTo(NavigationConstants.ABOUT_FRAGMENT)
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun goTo(fragmentName: String ){
+        val intent = Intent(context, ActivityMain::class.java)
+        intent.putExtra(NavigationConstants.DESTINATION_FRAGMENT, fragmentName)
+        startActivity(intent)
     }
 }

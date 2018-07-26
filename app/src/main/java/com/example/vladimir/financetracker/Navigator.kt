@@ -2,15 +2,19 @@ package com.example.vladimir.financetracker
 
 import android.content.Intent
 import android.support.v4.app.Fragment
+import com.example.vladimir.financetracker.fragments.FragmentAbout
 import com.example.vladimir.financetracker.fragments.FragmentExpenditure
 import com.example.vladimir.financetracker.fragments.FragmentMain
+import com.example.vladimir.financetracker.fragments.FragmentSettings
 
 class Navigator {
-    public fun navigate(intent: Intent?): Fragment {
-        when (intent?.getStringExtra(NavigationConstants.DESTINATION_FRAGMENT)) {
-            NavigationConstants.EXPENDITURE_FRAGMENT -> return FragmentExpenditure()
+    fun navigate(intent: Intent?): Fragment {
+        return when (intent?.getStringExtra(NavigationConstants.DESTINATION_FRAGMENT)) {
+            NavigationConstants.EXPENDITURE_FRAGMENT -> FragmentExpenditure()
+            NavigationConstants.SETTINGS_FRAGMENT -> FragmentSettings()
+            NavigationConstants.ABOUT_FRAGMENT -> FragmentAbout()
             else -> {
-                return FragmentMain()
+                FragmentMain()
             }
         }
     }
