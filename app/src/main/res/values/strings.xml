@@ -17,5 +17,7 @@
     <string name="submit">Подтвердить</string>
     <string name="cancel">Отмена</string>
     <string name="action_bar_spinner">Спиннер</string>
+    <string name="wallets">Кошельки</string>
+    <string name="statistics">Статистика</string>
 
 </resources>

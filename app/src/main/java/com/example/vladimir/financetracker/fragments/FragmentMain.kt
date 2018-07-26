@@ -8,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.computations.MoneyOperations
 import com.example.computations.entity.Operation
-import com.example.vladimir.financetracker.NavigationConstants
+import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.activities.ActivityMain
-import com.example.vladimir.financetracker.formatNumber
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class FragmentMain : Fragment() {
@@ -30,33 +28,28 @@ class FragmentMain : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mToolbar = view.findViewById(R.id.fragment_main_toolbar)
-        mTextRoubles = view.findViewById(R.id.fragment_main_txt_balance_rub_value)
-        mTextDollars = view.findViewById(R.id.fragment_main_txt_balance_usd_value)
-        mTextRoubles.text = resources.getString(R.string.balance_message, formatNumber(MoneyOperations.convertCurrency(MoneyOperations.getBalance(BALANCE, operations), 0.016)), resources.getString(R.string.rub))
-        mTextDollars.text = resources.getString(R.string.balance_message, formatNumber(MoneyOperations.getBalance(BALANCE, operations)), resources.getString(R.string.usd))
 
+        initComponents()
         initComponentsListeners()
-        initToolbar()
     }
 
-    private fun initComponentsListeners() {
-        fragment_main_add_expenditure_button.setOnClickListener {
-            goTo(NavigationConstants.EXPENDITURE_FRAGMENT)
-        }
+    private fun initComponents(){
+        bottom_appbar.replaceMenu(R.menu.menu_main)
     }
 
-    private fun initToolbar() {
-        mToolbar.inflateMenu(R.menu.menu_main)
-        mToolbar.title = resources.getString(R.string.app_name)
-        mToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_settings -> {
-                    goTo(NavigationConstants.SETTINGS_FRAGMENT)
+    private fun initComponentsListeners(){
+        bottom_appbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.action_wallets -> {
+                    goTo(Routes.WALLET_FRAGMENT)
                     true
                 }
+                R.id.action_settings -> {
+                    goTo(Routes.SETTINGS_FRAGMENT)
+                true
+                }
                 R.id.action_about -> {
-                    goTo(NavigationConstants.ABOUT_FRAGMENT)
+                    goTo(Routes.ABOUT_FRAGMENT)
                     true
                 }
                 else -> false
@@ -64,9 +57,10 @@ class FragmentMain : Fragment() {
         }
     }
 
+
     private fun goTo(fragmentName: String ){
         val intent = Intent(context, ActivityMain::class.java)
-        intent.putExtra(NavigationConstants.DESTINATION_FRAGMENT, fragmentName)
+        intent.putExtra(Routes.DESTINATION_FRAGMENT, fragmentName)
         startActivity(intent)
     }
 }

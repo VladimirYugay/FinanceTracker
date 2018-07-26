@@ -1,56 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/fragment_main_toolbar"/>
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:fabAttached="true"
+        app:navigationIcon="@drawable/ic_statistics"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabCradleMargin="8dp">
 
-    <TextView
-        android:id="@+id/fragment_main_txt_balance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/regular_text_size"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_toolbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/your_balance"
-        android:padding="@dimen/text_view_regular_padding"/>
-    
-    <TextView
-        android:id="@+id/fragment_main_txt_balance_rub_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/headline_text_size"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/text_view_regular_padding"/>
-
-    <TextView
-        android:id="@+id/fragment_main_txt_balance_usd_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/headline_text_size"
-        android:maxLines="1"
-        android:textColor="@android:color/holo_green_light"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance_rub_value"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/text_view_regular_padding"/>
+    </android.support.design.bottomappbar.BottomAppBar>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fragment_main_add_expenditure_button"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:layout_gravity="bottom|center_horizontal"
         android:src="@drawable/ic_add"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_anchor="@+id/bottom_appbar"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
