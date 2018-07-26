@@ -24,7 +24,10 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        loadFragment(Navigator().navigate(intent))
+        val fragment = Navigator().navigate(intent)
+        if(fragment != null){
+            loadFragment(fragment)
+        }
     }
 
 
