@@ -14,7 +14,7 @@ class ActivityAbout : AppCompatActivity() {
         initToolbar()
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.activity_about_toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.title = resources.getString(R.string.about_app)

@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ActivityMain"
+        <activity
+            android:name=".activities.ActivityMain"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ActivitySettings" />
-        <activity android:name=".activities.ActivityAbout"></activity>
+        <activity android:name=".activities.ActivityAbout"/>
     </application>
 
 </manifest>

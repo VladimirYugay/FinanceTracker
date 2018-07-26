@@ -12,15 +12,15 @@ import com.example.computations.MoneyOperations
 import com.example.computations.entity.Operation
 import com.example.vladimir.financetracker.FlowConstants
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.Utils
 import com.example.vladimir.financetracker.activities.ActivityAbout
 import com.example.vladimir.financetracker.activities.ActivityMain
 import com.example.vladimir.financetracker.activities.ActivitySettings
+import com.example.vladimir.financetracker.formatNumber
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class FragmentMain : Fragment(){
+class FragmentMain : Fragment() {
 
-    private lateinit var mFragmentToolbar: Toolbar
+    private lateinit var mToolbar: Toolbar
     private lateinit var mTextRoubles: TextView
     private lateinit var mTextDollars: TextView
     private var BALANCE = 1000.0
@@ -32,19 +32,17 @@ class FragmentMain : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mFragmentToolbar = view.findViewById(R.id.fragment_main_toolbar)
+        mToolbar = view.findViewById(R.id.fragment_main_toolbar)
         mTextRoubles = view.findViewById(R.id.fragment_main_txt_balance_rub_value)
         mTextDollars = view.findViewById(R.id.fragment_main_txt_balance_usd_value)
-        mTextRoubles.text = resources.getString(R.string.balance_message, Utils.formatNumber(MoneyOperations.convertCurrency(MoneyOperations.getBalance(BALANCE, operations),0.016)), resources.getString(R.string.rub))
-        mTextDollars.text = resources.getString(R.string.balance_message, Utils.formatNumber(MoneyOperations.getBalance(BALANCE, operations)), resources.getString(R.string.usd))
+        mTextRoubles.text = resources.getString(R.string.balance_message, formatNumber(MoneyOperations.convertCurrency(MoneyOperations.getBalance(BALANCE, operations), 0.016)), resources.getString(R.string.rub))
+        mTextDollars.text = resources.getString(R.string.balance_message, formatNumber(MoneyOperations.getBalance(BALANCE, operations)), resources.getString(R.string.usd))
 
         initComponentsListeners()
         initToolbar()
-
-
     }
 
-    private fun initComponentsListeners(){
+    private fun initComponentsListeners() {
         fragment_main_add_expenditure_button.setOnClickListener {
             val intent = Intent(context, ActivityMain::class.java)
             intent.putExtra(FlowConstants.LOAD_FRAGMENT, FlowConstants.LOAD_EXPENDITURE_FRAGMENT)
@@ -52,11 +50,11 @@ class FragmentMain : Fragment(){
         }
     }
 
-    private fun initToolbar(){
-        mFragmentToolbar.inflateMenu(R.menu.menu_main)
-        mFragmentToolbar.title = resources.getString(R.string.app_name)
-        mFragmentToolbar.setOnMenuItemClickListener {
-            when(it.itemId){
+    private fun initToolbar() {
+        mToolbar.inflateMenu(R.menu.menu_main)
+        mToolbar.title = resources.getString(R.string.app_name)
+        mToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
                 R.id.action_settings -> {
                     startActivity(Intent(context, ActivitySettings::class.java))
                     true
