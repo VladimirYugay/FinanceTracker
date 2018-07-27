@@ -38,10 +38,16 @@ class FragmentMain : Fragment() {
     }
 
     private fun initComponentsListeners(){
+        fab.setOnClickListener {
+            goTo(Routes.TRANSACTION_FRAGMENT)
+        }
+        bottom_appbar.setNavigationOnClickListener {
+            goTo(Routes.WALLET_FRAGMENT)
+        }
         bottom_appbar.setOnMenuItemClickListener {
             when(it.itemId){
-                R.id.action_wallets -> {
-                    goTo(Routes.WALLET_FRAGMENT)
+                R.id.action_statistics -> {
+                    goTo(Routes.STATISTICS_FRAGMENT)
                     true
                 }
                 R.id.action_settings -> {

@@ -14,7 +14,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:fabAttached="true"
-        app:navigationIcon="@drawable/ic_statistics"
+        app:navigationIcon="@drawable/ic_wallet"
         app:backgroundTint="@color/colorPrimary"
         app:fabCradleMargin="8dp">
 

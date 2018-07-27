@@ -14,7 +14,7 @@ class ActivityMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             loadFragmentWithoutBackStack(FragmentMain())
         }
     }
@@ -23,13 +23,13 @@ class ActivityMain : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val fragment = Router().navigate(intent)
-        if(fragment != null){
+        if (fragment != null) {
             loadFragment(fragment)
         }
     }
 
 
-    private fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
                 .replace(R.id.container, fragment)
@@ -37,7 +37,7 @@ class ActivityMain : AppCompatActivity() {
                 .commit()
     }
 
-    private fun loadFragmentWithoutBackStack(fragment: Fragment){
+    private fun loadFragmentWithoutBackStack(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
     }
 

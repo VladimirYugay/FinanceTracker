@@ -11,12 +11,12 @@ import android.widget.Spinner
 import android.widget.TextView
 import com.example.vladimir.financetracker.R
 
-class FragmentExpenditure() : Fragment() {
+class FragmentTransaction() : Fragment() {
 
     private lateinit var mFragmentExpenditureToobar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_expenditure, container, false)
+        return inflater.inflate(R.layout.fragment_transaction, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
