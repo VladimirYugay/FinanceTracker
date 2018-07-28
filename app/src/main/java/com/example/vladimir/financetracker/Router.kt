@@ -12,6 +12,7 @@ class Router {
             Routes.ABOUT_FRAGMENT -> FragmentAbout()
             Routes.WALLET_FRAGMENT -> FragmentWallet()
             Routes.STATISTICS_FRAGMENT -> FragmentStatistics()
+            Routes.MAIN_FRAGMENT -> FragmentMain()
             else -> {
                 null
             }

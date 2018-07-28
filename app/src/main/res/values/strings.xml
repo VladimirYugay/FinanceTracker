@@ -11,7 +11,7 @@
     <string name="usd">USD</string>
     <string name="balance_message">%1$s %2$s</string>
     <string name="your_balance">Ваш баланс</string>
-    <string name="add_expenditure">Добавьте Расход</string>
+    <string name="add_transaction">Добавьте Транзакцию</string>
     <string name="category">Категория</string>
     <string name="value">Стоимость</string>
     <string name="submit">Подтвердить</string>
@@ -19,5 +19,17 @@
     <string name="action_bar_spinner">Спиннер</string>
     <string name="wallets">Кошельки</string>
     <string name="statistics">Статистика</string>
+    <string name="transaction_type">Тип Транзакции</string>
+    <string name="name">Название</string>
+    <string name="currency">Валюта</string>
 
+    <string-array name="currencies">
+        <item>Доллары</item>
+        <item>Рубли</item>
+    </string-array>
+
+    <string-array name="transaction_types">
+        <item>Трата</item>
+        <item>Прибыль</item>
+    </string-array>
 </resources>

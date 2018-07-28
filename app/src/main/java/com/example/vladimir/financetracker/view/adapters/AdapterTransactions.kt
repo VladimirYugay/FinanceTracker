@@ -5,10 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.databinding.ItemTransactionsListBinding
 import com.example.vladimir.financetracker.model.entity.Transaction
 
-class AdapterTransactions() : RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
+class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
 
     var mList: List<Transaction>? = null
 
@@ -20,23 +21,24 @@ class AdapterTransactions() : RecyclerView.Adapter<AdapterTransactions.ViewHolde
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList?.get(position) ?: Transaction(108, "Empty", "Emtpy", "Empty", 108.0))
+        holder.bind(mList?.get(position)
+                ?: Transaction(createId(), "Empty", "Emtpy", "USD", "BUY", 108.0))
     }
 
-    override fun getItemCount() : Int{
-        return if(mList == null){
+    override fun getItemCount(): Int {
+        return if (mList == null) {
             0
-        }else{
+        } else {
             mList!!.size
         }
     }
 
 
-    fun setTransactionsList(items: List<Transaction>){
-        if(mList == null){
+    fun setTransactionsList(items: List<Transaction>) {
+        if (mList == null) {
             mList = items
             notifyItemRangeInserted(0, items.size)
-        }else{
+        } else {
             val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                 override fun getOldListSize(): Int {
                     return mList!!.size
@@ -59,8 +61,8 @@ class AdapterTransactions() : RecyclerView.Adapter<AdapterTransactions.ViewHolde
         }
     }
 
-    class ViewHolder(val binding: ItemTransactionsListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(transaction: Transaction){
+    class ViewHolder(val binding: ItemTransactionsListBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(transaction: Transaction) {
             binding.transaction = transaction
             binding.executePendingBindings()
         }

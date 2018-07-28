@@ -1,6 +1,6 @@
 package com.example.vladimir.financetracker.model.entity
 
-data class Wallet(val id: Int,
-                  val name: String,
-                  val balance: Double,
-                  val transactions: List<Transaction>?)
+data class Wallet(
+                  var name: String,
+                  var balance: Double = 0.0,
+                  var transactions: MutableList<Transaction> = mutableListOf())

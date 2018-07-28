@@ -7,4 +7,5 @@ object Routes{
     const val ABOUT_FRAGMENT = "ABOUT_FRAGMENT"
     const val WALLET_FRAGMENT = "WALLET_FRAGMENT"
     const val STATISTICS_FRAGMENT = "STATISTICS_FRAGMENT"
+    const val MAIN_FRAGMENT = "MAIN_FRAGMENT"
 }

@@ -1,19 +1,30 @@
 package com.example.vladimir.financetracker.view.fragments
 
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.createId
+import com.example.vladimir.financetracker.model.entity.Transaction
+import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
+import kotlinx.android.synthetic.main.fragment_transaction.*
 
 class FragmentTransaction() : Fragment() {
 
-    private lateinit var mFragmentExpenditureToobar: Toolbar
+    lateinit var mViewModel: FinanceTrackerViewModel
+    val transactionTypes = arrayOf("Трата", "Доход")
+    val currency = arrayOf("Рубли", "Доллары")
+    val category = arrayOf("Еда", "Одежда", "Развлечения", "Другое")
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mViewModel = ViewModelProviders.of(this).get(FinanceTrackerViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_transaction, container, false)
@@ -22,36 +33,46 @@ class FragmentTransaction() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mFragmentExpenditureToobar = view.findViewById(R.id.fragment_expenditure_toolbar)
+
+        initComponents()
         initToolbar()
     }
 
+    private fun initComponents() {
 
-    private fun initToolbar(){
-        mFragmentExpenditureToobar.setNavigationIcon(R.drawable.ic_arrow_back)
-        mFragmentExpenditureToobar.title = resources.getString(R.string.add_expenditure)
-        mFragmentExpenditureToobar.inflateMenu(R.menu.menu_dropdown)
-        mFragmentExpenditureToobar.setNavigationOnClickListener {
-            fragmentManager?.popBackStackImmediate()
+        fragment_transaction_type.adapter = object : ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, transactionTypes) {
         }
-        val spinnerItems = listOf(" ", "USD", "RUB")
-        val menuItem = mFragmentExpenditureToobar.menu.findItem(R.id.toolbar_spinner)
-        val spinner = menuItem.actionView as Spinner
-        val arrayAdapter = object : ArrayAdapter<CharSequence>(context, android.R.layout.simple_spinner_dropdown_item, spinnerItems){
-            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
-                lateinit var view: View
-                if(position == 0){
-                    val textView = TextView(context)
-                    textView.height = 0
-                    textView.visibility = View.GONE
-                    view = textView
-                }else{
-                    view = super.getDropDownView(position, null, parent)
-                }
-                return view
+
+        fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, category) {
+        }
+
+        fragment_transaction_currency.adapter = object : ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, currency) {
+        }
+
+
+        fragment_transaction_add.setOnClickListener {
+            if (fragment_transaction_name.text.toString().isNotBlank()
+                    && fragment_transaction_value.text.toString().isNotBlank()) {
+                mViewModel.addTransaction(Transaction(createId(),
+                        fragment_transaction_name.text.toString(),
+                        fragment_transaction_type.selectedItem.toString(),
+                        fragment_transaction_currency.selectedItem.toString(),
+                        fragment_transaction_category.selectedItem.toString(),
+                        fragment_transaction_value.text.toString().toDouble()
+                ))
+                fragmentManager?.popBackStackImmediate()
             }
         }
-        spinner.adapter = arrayAdapter
+    }
 
+
+    private fun initToolbar() {
+        fragment_transaction_toolbar.title = resources.getString(R.string.add_transaction)
+        fragment_transaction_toolbar.setNavigationOnClickListener {
+            fragmentManager?.popBackStackImmediate()
+        }
     }
 }
