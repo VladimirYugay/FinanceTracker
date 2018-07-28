@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -20,6 +21,9 @@ android {
         debug {
             debuggable true
         }
+        dataBinding {
+            enabled true
+        }
     }
 }
 
@@ -29,10 +33,14 @@ dependencies {
     implementation deps.support.support
     implementation deps.support.design
     implementation deps.support.constraint
+    implementation deps.support.recycler
 
+    implementation deps.arch.view_model
+    implementation deps.arch.live_data
+    implementation deps.arch.lifecycle_extension
+    kapt deps.databinding_compiler
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.espresso.core
-    implementation project(path: ':computations')
 }

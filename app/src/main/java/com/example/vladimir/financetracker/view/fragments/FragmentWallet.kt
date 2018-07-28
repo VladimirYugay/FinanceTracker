@@ -1,4 +1,4 @@
-package com.example.vladimir.financetracker.fragments
+package com.example.vladimir.financetracker.view.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

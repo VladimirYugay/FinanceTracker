@@ -2,7 +2,7 @@ package com.example.vladimir.financetracker
 
 import android.content.Intent
 import android.support.v4.app.Fragment
-import com.example.vladimir.financetracker.fragments.*
+import com.example.vladimir.financetracker.view.fragments.*
 
 class Router {
     fun navigate(intent: Intent?): Fragment? {

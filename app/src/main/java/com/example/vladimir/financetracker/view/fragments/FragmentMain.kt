@@ -1,26 +1,26 @@
-package com.example.vladimir.financetracker.fragments
+package com.example.vladimir.financetracker.view.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.example.computations.entity.Operation
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.activities.ActivityMain
+import com.example.vladimir.financetracker.model.entity.Wallet
+import com.example.vladimir.financetracker.view.activities.ActivityMain
+import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
+import com.example.vladimir.financetracker.viewmodel.WalletViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class FragmentMain : Fragment() {
 
-    private lateinit var mToolbar: Toolbar
-    private lateinit var mTextRoubles: TextView
-    private lateinit var mTextDollars: TextView
-    private var BALANCE = 1000.0
-    private var operations: ArrayList<Operation> = ArrayList()
+    lateinit var mViewModel: WalletViewModel
+    lateinit var mAdapter: AdapterTransactions
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
@@ -29,8 +29,26 @@ class FragmentMain : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        mViewModel = ViewModelProviders.of(this).get(WalletViewModel::class.java)
+        mAdapter = AdapterTransactions()
+        recycler_fragment_main.adapter = mAdapter
+        recycler_fragment_main.layoutManager = LinearLayoutManager(context)
+        observeViewModel(mViewModel)
+
         initComponents()
         initComponentsListeners()
+    }
+
+
+    private fun observeViewModel(viewModel: WalletViewModel) {
+        // Update the list when the data changes
+        viewModel.getObservableField().observe(this, Observer<Wallet> { wallet ->
+            if (wallet != null) {
+                wallet.transactions?.let {
+                    mAdapter.setTransactionsList(it) }
+            }
+        })
     }
 
     private fun initComponents(){

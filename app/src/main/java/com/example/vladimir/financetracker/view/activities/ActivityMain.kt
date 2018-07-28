@@ -1,4 +1,4 @@
-package com.example.vladimir.financetracker.activities
+package com.example.vladimir.financetracker.view.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.vladimir.financetracker.Router
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.fragments.FragmentMain
+import com.example.vladimir.financetracker.view.fragments.FragmentMain
 
 class ActivityMain : AppCompatActivity() {
 
