@@ -45,8 +45,7 @@ class FragmentMain : Fragment() {
 
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
-        viewModel.liveTransactions.observe(this, Observer<MutableList<Transaction>>{
-            transactions ->
+        viewModel.liveTransactions.observe(this, Observer<MutableList<Transaction>> { transactions ->
             transactions?.let { mAdapter.setTransactionsList(it) }
         })
     }

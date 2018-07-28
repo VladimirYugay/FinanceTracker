@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="transaction"
@@ -11,9 +12,20 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/item_transactions_list_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:text="@{transaction.date}"/>
+
+    <TextView
         android:id="@+id/item_transactions_list_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
         android:text="@{transaction.name}"/>
 
 </android.support.constraint.ConstraintLayout>

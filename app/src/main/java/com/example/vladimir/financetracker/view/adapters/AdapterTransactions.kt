@@ -22,7 +22,7 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mList?.get(position)
-                ?: Transaction(createId(), "Empty", "Emtpy", "USD", "BUY", 108.0))
+                ?: Transaction(createId(), "Empty", "Emtpy", "USD", "BUY", 108.0, "1882"))
     }
 
     override fun getItemCount(): Int {
