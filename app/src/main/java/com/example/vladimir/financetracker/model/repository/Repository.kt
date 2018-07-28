@@ -24,21 +24,10 @@ class Repository {
         val transaction = Transaction(createId(), "Burger", "BUY", "RUB", "FOOD", 100.0, "1984")
         val transaction2 = Transaction(createId(), "Sandwich", "BUY", "USD", "FOOD", 80.0, "1984")
         val transaction3 = Transaction(createId(), "Latte", "BUY", "RUB", "FOOD", 150.0, "1984")
-        transactions.value = mutableListOf(transaction, transaction2, transaction3)
+        val transaction4 = Transaction(createId(), "Latte", "BUY", "RUB", "FOOD", 150.0, "1984")
+        val transaction5 = Transaction(createId(), "Latte", "BUY", "RUB", "FOOD", 150.0, "1984")
+        transactions.value = mutableListOf(transaction, transaction2, transaction3, transaction4, transaction5)
         return transactions
-    }
-
-    fun dummyRepositoryFunctions(name: String): MutableLiveData<Wallet> {
-        //get wallet from database
-        val transaction = Transaction(createId(), "Burger", "BUY", "RUB", "FOOD", 100.0, "1882")
-        val transaction2 = Transaction(createId(), "Sandwich", "BUY", "USD", "FOOD", 80.0, "1882")
-        val transaction3 = Transaction(createId(), "Latte", "BUY", "RUB", "FOOD", 150.0, "1882")
-        val data = MutableLiveData<Wallet>()
-        val wallet = Wallet("WALLET", 250.0, mutableListOf(transaction, transaction2, transaction3))
-
-        wallets.value = mutableListOf(wallet)
-        data.value = wallet
-        return data
     }
 
 

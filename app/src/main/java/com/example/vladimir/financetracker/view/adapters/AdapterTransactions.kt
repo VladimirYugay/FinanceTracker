@@ -11,8 +11,7 @@ import com.example.vladimir.financetracker.model.entity.Transaction
 
 class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
 
-    var mList: List<Transaction>? = null
-
+    val mList = mutableListOf<Transaction>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterTransactions.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,43 +20,18 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList?.get(position)
-                ?: Transaction(createId(), "Empty", "Emtpy", "USD", "BUY", 108.0, "1882"))
+        holder.bind(mList.get(position))
     }
 
     override fun getItemCount(): Int {
-        return if (mList == null) {
-            0
-        } else {
-            mList!!.size
-        }
+        return mList.size
     }
 
 
     fun setTransactionsList(items: List<Transaction>) {
-        if (mList == null) {
-            mList = items
-            notifyItemRangeInserted(0, items.size)
-        } else {
-            val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int {
-                    return mList!!.size
-                }
-
-                override fun getNewListSize(): Int {
-                    return items.size
-                }
-
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return mList!![oldItemPosition].id == mList!![newItemPosition].id
-                }
-
-                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return mList!![oldItemPosition].id == mList!![newItemPosition].id
-                }
-            })
-            mList = items
-            result.dispatchUpdatesTo(this)
+        items.forEach {
+            mList.add(it)
+            notifyItemInserted(mList.size - 1)
         }
     }
 

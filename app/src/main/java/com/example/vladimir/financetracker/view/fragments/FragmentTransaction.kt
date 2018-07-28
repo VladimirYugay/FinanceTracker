@@ -24,9 +24,9 @@ class FragmentTransaction() : Fragment() {
     val currency = arrayOf("Рубли", "Доллары")
     val category = arrayOf("Еда", "Одежда", "Развлечения", "Другое")
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        mViewModel = ViewModelProviders.of(this).get(FinanceTrackerViewModel::class.java)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(activity!!).get(FinanceTrackerViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

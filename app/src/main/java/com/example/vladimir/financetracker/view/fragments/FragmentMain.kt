@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.goTo
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
@@ -22,21 +23,21 @@ class FragmentMain : Fragment() {
     lateinit var mViewModel: FinanceTrackerViewModel
     lateinit var mAdapter: AdapterTransactions
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        mViewModel = ViewModelProviders.of(this).get(FinanceTrackerViewModel::class.java)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(activity!!).get(FinanceTrackerViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mAdapter = AdapterTransactions()
         recycler_fragment_main.adapter = mAdapter
-        recycler_fragment_main.layoutManager = LinearLayoutManager(context)
         observeViewModel(mViewModel)
 
         initComponents()
