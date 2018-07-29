@@ -31,6 +31,8 @@
     <string name="wallet_name">Название Кошелька</string>
     <string name="ok">Ok</string>
     <string name="wallet">Кошелек</string>
+    <string name="current_balance">Текущий Баланс: &#160;</string>
+    <string name="wallet_name_dots">Текущий Кошелек: &#160;</string>
 
     <string-array name="currencies">
         <item>Доллары</item>

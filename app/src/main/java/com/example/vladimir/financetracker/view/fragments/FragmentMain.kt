@@ -2,13 +2,11 @@ package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.goTo
@@ -42,12 +40,14 @@ class FragmentMain : Fragment() {
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
 
         viewModel.getTransactions().observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                mAdapter.setTransactionsList(it)
-            } else {
-                goTo(context, Routes.WALLETS_FRAGMENT)
-            }
+            mAdapter.setTransactionsList(it)
         })
+
+        viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
+            fragment_main_balance.text = it?.balance.toString()
+            fragment_main_wallet.text = it?.name
+        })
+
     }
 
     private fun initComponents() {

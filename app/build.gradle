@@ -35,6 +35,8 @@ dependencies {
     implementation deps.support.constraint
     implementation deps.support.recycler
 
+    implementation deps.pie_chart
+
     implementation deps.arch.view_model
     implementation deps.arch.live_data
     implementation deps.arch.lifecycle_extension

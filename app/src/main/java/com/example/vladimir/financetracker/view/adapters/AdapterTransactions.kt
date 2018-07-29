@@ -1,17 +1,16 @@
 package com.example.vladimir.financetracker.view.adapters
 
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.databinding.ItemTransactionsListBinding
 import com.example.vladimir.financetracker.model.entity.Transaction
+import com.example.vladimir.financetracker.model.entity.Wallet
 
 class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
 
-    val mList = mutableListOf<Transaction>()
+    val mTransactionsList = mutableListOf<Transaction>()
+    lateinit var mWallet: Wallet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterTransactions.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -20,18 +19,18 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList.get(position))
+        holder.bind(mTransactionsList[position])
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return mTransactionsList.size
     }
 
 
-    fun setTransactionsList(items: List<Transaction>) {
-        items.forEach {
-            mList.add(it)
-            notifyItemInserted(mList.size - 1)
+    fun setTransactionsList(items: MutableList<Transaction>?) {
+        items?.forEach {
+            mTransactionsList.add(it)
+            notifyItemInserted(mTransactionsList.size - 1)
         }
     }
 

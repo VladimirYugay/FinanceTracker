@@ -36,6 +36,13 @@ class FinanceTrackerViewModel : ViewModel() {
         Repository.instance.getAllWallets().forEach {
             if(it.name == walletName) observableWallet.value = it
         }
+        observableWallets.value?.sortedWith(object : Comparator<Wallet>{
+            override fun compare(p0: Wallet?, p1: Wallet?): Int {
+                if(p0?.name.equals(walletName)) return -1
+                else return 1
+            }
+
+        })
     }
 
     fun getTransactions(): MutableLiveData<MutableList<Transaction>>{

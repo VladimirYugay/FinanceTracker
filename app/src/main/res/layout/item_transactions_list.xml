@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="java.lang.String" />
+        <import type="java.lang.String"/>
         <variable
             name="transaction"
             type="com.example.vladimir.financetracker.model.entity.Transaction" />
@@ -31,9 +31,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/item_transactions_list_value"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
@@ -42,7 +43,8 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/headline_text_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date" />
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
             android:id="@+id/item_transactions_list_category"

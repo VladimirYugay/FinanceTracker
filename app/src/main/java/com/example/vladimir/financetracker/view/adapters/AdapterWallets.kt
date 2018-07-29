@@ -2,6 +2,7 @@ package com.example.vladimir.financetracker.view.adapters
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,10 +13,13 @@ import com.example.vladimir.financetracker.databinding.ItemTransactionsListBindi
 import com.example.vladimir.financetracker.databinding.ItemWalletsListBinding
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.model.entity.Wallet
+import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 
-class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
+class AdapterWallets(viewModel: FinanceTrackerViewModel) : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
     val mList = mutableListOf<Wallet>()
+    val mViewModel = viewModel
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterWallets.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,7 +31,9 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
         holder.bind(mList[position])
         holder.binding.root.setOnClickListener {
-
+            mViewModel.changeWallet(mList[position].name)
+//            holder.binding.root.setBackgroundColor(ResourcesCompat.getColor(holder.binding.root.context.resources, R.color.colorAccent, null))
+//            notifyDataSetChanged()
         }
     }
 

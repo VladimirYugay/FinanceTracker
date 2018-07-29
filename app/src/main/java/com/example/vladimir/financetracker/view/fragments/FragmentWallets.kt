@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_wallets.*
 class FragmentWallets : Fragment() {
 
     private lateinit var mWalletsAdapter: AdapterWallets
-    private lateinit var mViewModel: FinanceTrackerViewModel
+    lateinit var mViewModel: FinanceTrackerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponents() {
-        mWalletsAdapter = AdapterWallets()
+        mWalletsAdapter = AdapterWallets(mViewModel)
         fragment_wallets_recycler.adapter = mWalletsAdapter
         observeViewModel()
         fragment_wallets_toolbar.inflateMenu(R.menu.menu_fragment_wallets)
