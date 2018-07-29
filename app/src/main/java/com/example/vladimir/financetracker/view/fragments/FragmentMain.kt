@@ -2,18 +2,14 @@ package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.goTo
-import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -36,22 +32,25 @@ class FragmentMain : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter = AdapterTransactions()
-        recycler_fragment_main.adapter = mAdapter
-        observeViewModel(mViewModel)
-
         initComponents()
         initComponentsListeners()
     }
 
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
-        viewModel.liveTransactions.observe(this, Observer<MutableList<Transaction>> { transactions ->
-            transactions?.let { mAdapter.setTransactionsList(it) }
+        viewModel.getSelectedTransactions().observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                mAdapter.setTransactionsList(it)
+            } else {
+                goTo(context, Routes.WALLETS_FRAGMENT)
+            }
         })
     }
 
     private fun initComponents() {
+        mAdapter = AdapterTransactions()
+        recycler_fragment_main.adapter = mAdapter
+        observeViewModel(mViewModel)
         bottom_appbar.replaceMenu(R.menu.menu_main)
     }
 
@@ -60,7 +59,7 @@ class FragmentMain : Fragment() {
             goTo(context, Routes.TRANSACTION_FRAGMENT)
         }
         bottom_appbar.setNavigationOnClickListener {
-            goTo(context, Routes.WALLET_FRAGMENT)
+            goTo(context, Routes.WALLETS_FRAGMENT)
         }
         bottom_appbar.setOnMenuItemClickListener {
             when (it.itemId) {

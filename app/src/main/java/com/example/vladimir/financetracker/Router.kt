@@ -10,9 +10,10 @@ class Router {
             Routes.TRANSACTION_FRAGMENT -> FragmentTransaction()
             Routes.SETTINGS_FRAGMENT -> FragmentSettings()
             Routes.ABOUT_FRAGMENT -> FragmentAbout()
-            Routes.WALLET_FRAGMENT -> FragmentWallet()
+            Routes.WALLETS_FRAGMENT -> FragmentWallets()
             Routes.STATISTICS_FRAGMENT -> FragmentStatistics()
             Routes.MAIN_FRAGMENT -> FragmentMain()
+            Routes.ADD_WALLET_FRAGMENT -> FragmentAddWallet()
             else -> {
                 null
             }

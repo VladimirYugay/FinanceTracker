@@ -16,9 +16,6 @@ class ActivityMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel = ViewModelProviders.of(this).get(FinanceTrackerViewModel::class.java)
-        //viewModel.init()
-
         if (savedInstanceState == null) {
             loadFragmentWithoutBackStack(FragmentMain())
         }

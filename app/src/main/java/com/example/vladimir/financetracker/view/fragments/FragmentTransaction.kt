@@ -1,10 +1,7 @@
 package com.example.vladimir.financetracker.view.fragments
 
-import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +12,6 @@ import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_transaction.*
-import java.util.*
 
 class FragmentTransaction() : Fragment() {
 
@@ -61,7 +57,7 @@ class FragmentTransaction() : Fragment() {
 
     private fun initComponentsListeners() {
 
-        fragment_transaction_add.setOnClickListener {
+        fragment_wallets_ok.setOnClickListener {
             if (fragment_transaction_name.text.toString().isNotBlank()
                     && fragment_transaction_value.text.toString().isNotBlank()
                     && fragment_transaction_date.text.toString().isNotBlank()) {

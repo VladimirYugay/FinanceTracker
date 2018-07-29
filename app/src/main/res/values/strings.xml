@@ -23,6 +23,8 @@
     <string name="name">Название</string>
     <string name="currency">Валюта</string>
     <string name="date">День-Месяц-Год</string>
+    <string name="my_wallets">Мои Кошельки</string>
+    <string name="add_wallet">Добавить Кошелек</string>
 
     <string-array name="currencies">
         <item>Доллары</item>

@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/toolbar_spinner"
-        android:title="@string/action_bar_spinner"
-        app:actionViewClass="android.widget.Spinner"
+        android:id="@+id/action_add_wallet"
+        android:title="@string/add_wallet"
+        android:icon="@drawable/ic_add_white"
         app:showAsAction="always" />
 </menu>
