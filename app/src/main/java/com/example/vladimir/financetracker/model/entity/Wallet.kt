@@ -1,7 +1,6 @@
 package com.example.vladimir.financetracker.model.entity
 
-data class Wallet(
+data class Wallet(val id: String,
                   var name: String,
                   var balance: Double = 0.0,
-                  var transactions: MutableList<Transaction> = mutableListOf(),
                   var selected: Boolean = false)

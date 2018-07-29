@@ -6,4 +6,5 @@ data class Transaction(val id: String,
                        val currency: String,
                        val category: String,
                        val value: Double,
-                       val date: String)
+                       val date: String,
+                       val wallet: String)

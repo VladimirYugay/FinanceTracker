@@ -67,8 +67,8 @@ class FragmentTransaction() : Fragment() {
                         fragment_transaction_currency.selectedItem.toString(),
                         fragment_transaction_category.selectedItem.toString(),
                         fragment_transaction_value.text.toString().toDouble(),
-                        fragment_transaction_date.text.toString()
-                ))
+                        fragment_transaction_date.text.toString(),
+                ""))
                 fragmentManager?.popBackStackImmediate()
             }
         }

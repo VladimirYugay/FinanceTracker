@@ -20,6 +20,9 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mList.get(position))
+        holder.binding.root.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
