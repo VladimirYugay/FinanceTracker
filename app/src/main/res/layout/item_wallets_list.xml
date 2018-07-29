@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@{wallet.selected ? @color/colorAccent : @android:color/white}">
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/item_wallets_list_balance"

@@ -1,8 +1,13 @@
 package com.example.vladimir.financetracker.view.adapters
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.vladimir.financetracker.Constants
+import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.databinding.ItemTransactionsListBinding
 import com.example.vladimir.financetracker.databinding.ItemWalletsListBinding
 import com.example.vladimir.financetracker.model.entity.Transaction
@@ -19,7 +24,8 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList.get(position))
+
+        holder.bind(mList[position])
         holder.binding.root.setOnClickListener {
 
         }

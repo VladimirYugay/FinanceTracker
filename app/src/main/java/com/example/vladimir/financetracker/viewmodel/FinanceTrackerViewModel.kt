@@ -1,5 +1,6 @@
 package com.example.vladimir.financetracker.viewmodel
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.example.vladimir.financetracker.model.entity.Transaction
@@ -14,29 +15,39 @@ class FinanceTrackerViewModel : ViewModel() {
 
     init {
         Repository.instance.initData()
+        observableWallet.value = Repository.instance.wallets.first()
+        observableWallets.value = Repository.instance.getAllWallets()
+        observableTransactions.value = Repository.instance.getTransactions(Repository.instance.wallets.first().name)
     }
 
-    fun getWallets(): MutableLiveData<MutableList<Wallet>>{
-        observableWallets.value = Repository.instance.wallets
+    fun getWallet(name: String): LiveData<Wallet>{
+        val wallet = Repository.instance.getWallet(name)
+        observableWallet.value = wallet
+        return observableWallet
+    }
+
+    fun getAllWallets(): MutableLiveData<MutableList<Wallet>>{
+        observableWallets.value = Repository.instance.getAllWallets()
         return observableWallets
     }
 
-    fun getSelectedWallet(): MutableLiveData<Wallet>{
-        val data: MutableLiveData<Wallet> = MutableLiveData()
-        data.value = Repository.instance.getSelectedWallet()
-        return data
+    fun changeWallet(walletName: String){
+        observableTransactions.value = Repository.instance.getTransactions(walletName)
+        Repository.instance.getAllWallets().forEach {
+            if(it.name == walletName) observableWallet.value = it
+        }
+    }
+
+    fun getTransactions(): MutableLiveData<MutableList<Transaction>>{
+        observableTransactions.value = observableWallet.value?.name?.let { Repository.instance.getTransactions(it) }
+        return observableTransactions
     }
 
     fun addWallet(wallet: Wallet){
         Repository.instance.addWallet(wallet)
     }
 
-    fun getSelectedTransactions(): MutableLiveData<MutableList<Transaction>>{
-        observableTransactions.value = Repository.instance.getSelectedTransactions()
-        return observableTransactions
-    }
-
     fun addTransaction(transaction: Transaction){
-        Repository.instance.addTransaction(transaction)
+        observableWallet.value?.name?.let { transaction.copy(wallet = it) }?.let { Repository.instance.addTransaction(it) }
     }
 }

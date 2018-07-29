@@ -36,7 +36,7 @@ class FragmentWallets : Fragment() {
     }
 
     private fun observeViewModel() {
-        mViewModel.getWallets().observe(viewLifecycleOwner, Observer {
+        mViewModel.getAllWallets().observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 mWalletsAdapter.setWalletsList(it)
             }

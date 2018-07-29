@@ -2,11 +2,13 @@ package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.goTo
@@ -38,7 +40,8 @@ class FragmentMain : Fragment() {
 
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
-        viewModel.getSelectedTransactions().observe(viewLifecycleOwner, Observer {
+
+        viewModel.getTransactions().observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 mAdapter.setTransactionsList(it)
             } else {
@@ -56,7 +59,7 @@ class FragmentMain : Fragment() {
 
     private fun initComponentsListeners() {
         fab.setOnClickListener {
-            goTo(context, Routes.TRANSACTION_FRAGMENT)
+            goTo(context, Routes.ADD_TRANSACTION_FRAGMENT)
         }
         bottom_appbar.setNavigationOnClickListener {
             goTo(context, Routes.WALLETS_FRAGMENT)

@@ -11,7 +11,7 @@
     <string name="usd">USD</string>
     <string name="balance_message">%1$s %2$s</string>
     <string name="your_balance">Ваш баланс</string>
-    <string name="add_transaction">Добавьте Транзакцию</string>
+    <string name="add_transaction">Добавить Транзакцию</string>
     <string name="category">Категория</string>
     <string name="value">Стоимость</string>
     <string name="submit">Подтвердить</string>
@@ -25,6 +25,12 @@
     <string name="date">День-Месяц-Год</string>
     <string name="my_wallets">Мои Кошельки</string>
     <string name="add_wallet">Добавить Кошелек</string>
+    <string name="income">Доход</string>
+    <string name="expenditure">Расход</string>
+    <string name="default_wallet">Сделать кошельком по умолчанию</string>
+    <string name="wallet_name">Название Кошелька</string>
+    <string name="ok">Ok</string>
+    <string name="wallet">Кошелек</string>
 
     <string-array name="currencies">
         <item>Доллары</item>

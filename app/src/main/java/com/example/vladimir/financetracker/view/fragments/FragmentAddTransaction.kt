@@ -1,19 +1,21 @@
 package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_transaction.*
 
-class FragmentTransaction() : Fragment() {
+class FragmentAddTransaction() : Fragment() {
 
     lateinit var mViewModel: FinanceTrackerViewModel
     val transactionTypes = arrayOf("Трата", "Доход")
@@ -35,14 +37,9 @@ class FragmentTransaction() : Fragment() {
 
         initComponents()
         initComponentsListeners()
-        initToolbar()
     }
 
     private fun initComponents() {
-
-        fragment_transaction_type.adapter = object : ArrayAdapter<String>(context,
-                R.layout.spinner_item, transactionTypes) {
-        }
 
         fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, category) {
@@ -61,9 +58,10 @@ class FragmentTransaction() : Fragment() {
             if (fragment_transaction_name.text.toString().isNotBlank()
                     && fragment_transaction_value.text.toString().isNotBlank()
                     && fragment_transaction_date.text.toString().isNotBlank()) {
+
                 mViewModel.addTransaction(Transaction(createId(),
                         fragment_transaction_name.text.toString(),
-                        fragment_transaction_type.selectedItem.toString(),
+                        fragment_transaction_expendture.isChecked,
                         fragment_transaction_currency.selectedItem.toString(),
                         fragment_transaction_category.selectedItem.toString(),
                         fragment_transaction_value.text.toString().toDouble(),
@@ -72,11 +70,7 @@ class FragmentTransaction() : Fragment() {
                 fragmentManager?.popBackStackImmediate()
             }
         }
-    }
 
-
-    private fun initToolbar() {
-        fragment_transaction_toolbar.title = resources.getString(R.string.add_transaction)
         fragment_transaction_toolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStackImmediate()
         }
