@@ -1,56 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/fragment_main_toolbar"/>
+    <RelativeLayout
+        android:id="@+id/fragment_main_balance_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_margin="8dp">
 
-    <TextView
-        android:id="@+id/fragment_main_txt_balance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/regular_text_size"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_toolbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/your_balance"
-        android:padding="@dimen/text_view_regular_padding"/>
-    
-    <TextView
-        android:id="@+id/fragment_main_txt_balance_rub_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/headline_text_size"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/text_view_regular_padding"/>
+        <TextView
+            android:id="@+id/fragment_main_wallet_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wallet_name_dots"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/sub_headline_text_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"/>
 
-    <TextView
-        android:id="@+id/fragment_main_txt_balance_usd_value"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/fragment_main_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sub_headline_text_size"
+            android:layout_toEndOf="@+id/fragment_main_wallet_label"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/fragment_main_balance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_main_wallet_label"
+            android:text="@string/current_balance"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sub_headline_text_size"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/fragment_main_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_main_wallet_label"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="@dimen/sub_headline_text_size"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_toEndOf="@+id/fragment_main_wallet_label"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_fragment_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/headline_text_size"
-        android:maxLines="1"
-        android:textColor="@android:color/holo_green_light"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main_txt_balance_rub_value"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/text_view_regular_padding"/>
+        android:layout_marginTop="112dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true" />
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabAttached="true"
+        app:fabCradleMargin="8dp"
+        app:navigationIcon="@drawable/ic_wallet"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </android.support.design.bottomappbar.BottomAppBar>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fragment_main_add_expenditure_button"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:layout_gravity="bottom|center_horizontal"
         android:src="@drawable/ic_add"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_anchor="@+id/bottom_appbar" />
 
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

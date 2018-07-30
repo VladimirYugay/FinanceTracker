@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion build_versions.target_sdk
     defaultConfig {
         applicationId "com.example.vladimir.financetracker"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -22,20 +21,30 @@ android {
         debug {
             debuggable true
         }
+        dataBinding {
+            enabled true
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$support"
-    implementation "com.android.support:support-v4:$support"
-    implementation "com.android.support:design:$support"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
+    implementation deps.kotlin.stdlib
+    implementation deps.support.app_compat
+    implementation deps.support.support
+    implementation deps.support.design
+    implementation deps.support.constraint
+    implementation deps.support.recycler
 
+    implementation deps.pie_chart
+    implementation deps.coroutines
+    implementation deps.okhttp
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation "com.android.support.test:runner:$test_runner"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
-    implementation project(path: ':computations')
+    implementation deps.arch.view_model
+    implementation deps.arch.live_data
+    implementation deps.arch.lifecycle_extension
+    kapt deps.databinding_compiler
+
+    testImplementation deps.junit
+    androidTestImplementation deps.atsl.runner
+    androidTestImplementation deps.espresso.core
 }
