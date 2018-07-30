@@ -30,11 +30,20 @@ class AdapterWallets(viewModel: FinanceTrackerViewModel) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.bind(mList[position])
-        holder.binding.root.setOnClickListener {
-            mViewModel.changeWallet(mList[position].name)
-//            holder.binding.root.setBackgroundColor(ResourcesCompat.getColor(holder.binding.root.context.resources, R.color.colorAccent, null))
-//            notifyDataSetChanged()
+
+        if(mList[position].name == mViewModel.observableWallet.value?.name){
+            holder.binding.root.setBackgroundColor(ResourcesCompat.getColor(holder.binding.root.context.resources, R.color.colorAccent, null))
+        }else{
+            holder.binding.root.setBackgroundColor(ResourcesCompat.getColor(holder.binding.root.context.resources, android.R.color.white, null))
         }
+
+        holder.binding.root.setOnClickListener {
+            mViewModel.changeWallet(mList[position].name.trim())
+            holder.binding.root.setBackgroundColor(ResourcesCompat.getColor(holder.binding.root.context.resources, R.color.colorAccent, null))
+            notifyDataSetChanged()
+        }
+
+
     }
 
     override fun getItemCount(): Int {

@@ -1,5 +1,4 @@
 package com.example.vladimir.financetracker.model.entity
 
-data class Wallet(val id: String,
-                  var name: String,
+data class Wallet(var name: String,
                   var balance: Double = 0.0)

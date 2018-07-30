@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.createId
@@ -54,10 +55,13 @@ class FragmentAddWallet : Fragment(){
                     mViewModel.changeWallet(fragment_add_wallet_name.text.toString())
                 }
 
-                mViewModel.addWallet(Wallet(createId(),
-                        fragment_add_wallet_name.text.toString(),
-                        fragment_add_wallet_value.text.toString().toDouble()))
-                fragmentManager?.popBackStackImmediate()
+                if(mViewModel.addWallet(Wallet(fragment_add_wallet_name.text.toString(),
+                        fragment_add_wallet_value.text.toString().toDouble()))){
+                    fragmentManager?.popBackStackImmediate()
+                }else{
+                    Toast.makeText(context, R.string.existing_wallet, Toast.LENGTH_SHORT).show()
+                }
+
             }
         }
 

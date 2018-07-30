@@ -36,6 +36,8 @@ dependencies {
     implementation deps.support.recycler
 
     implementation deps.pie_chart
+    implementation deps.coroutines
+    implementation deps.okhttp
 
     implementation deps.arch.view_model
     implementation deps.arch.live_data

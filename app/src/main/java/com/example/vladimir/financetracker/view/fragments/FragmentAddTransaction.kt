@@ -1,14 +1,13 @@
 package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.model.entity.Transaction
@@ -18,9 +17,9 @@ import kotlinx.android.synthetic.main.fragment_transaction.*
 class FragmentAddTransaction() : Fragment() {
 
     lateinit var mViewModel: FinanceTrackerViewModel
-    val transactionTypes = arrayOf("Трата", "Доход")
     val currency = arrayOf("Рубли", "Доллары")
-    val category = arrayOf("Еда", "Одежда", "Развлечения", "Другое")
+    val categoryExpenditure = arrayOf("Еда", "Одежда", "Развлечения", "Другое")
+    val categoryProfit = arrayOf("Зарплата", "Воровство", "Взяточничество", "Другое")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +41,7 @@ class FragmentAddTransaction() : Fragment() {
     private fun initComponents() {
 
         fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
-                R.layout.spinner_item, category) {
+                R.layout.spinner_item, categoryExpenditure) {
         }
 
         fragment_transaction_currency.adapter = object : ArrayAdapter<String>(context,
@@ -54,17 +53,32 @@ class FragmentAddTransaction() : Fragment() {
 
     private fun initComponentsListeners() {
 
+        fragment_transaction_expendture.setOnClickListener {
+            if(fragment_transaction_expendture.isChecked){
+                fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+                        R.layout.spinner_item, categoryExpenditure) {
+                }
+            }else{
+                fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+                        R.layout.spinner_item, categoryProfit) {
+                }
+            }
+        }
+
         fragment_wallets_ok.setOnClickListener {
             if (fragment_transaction_name.text.toString().isNotBlank()
                     && fragment_transaction_value.text.toString().isNotBlank()
                     && fragment_transaction_date.text.toString().isNotBlank()) {
 
+                var value = fragment_transaction_value.text.toString().toDouble()
+                if(fragment_transaction_expendture.isChecked) value = -value
+                if(fragment_transaction_currency.equals(currency.first())) value /= mViewModel.getUSD()
                 mViewModel.addTransaction(Transaction(createId(),
                         fragment_transaction_name.text.toString(),
                         fragment_transaction_expendture.isChecked,
                         fragment_transaction_currency.selectedItem.toString(),
                         fragment_transaction_category.selectedItem.toString(),
-                        fragment_transaction_value.text.toString().toDouble(),
+                        value,
                         fragment_transaction_date.text.toString(),
                 ""))
                 fragmentManager?.popBackStackImmediate()

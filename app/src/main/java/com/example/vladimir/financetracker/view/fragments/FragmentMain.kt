@@ -1,5 +1,6 @@
 package com.example.vladimir.financetracker.view.fragments
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -39,12 +40,12 @@ class FragmentMain : Fragment() {
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
 
-        viewModel.getTransactions().observe(viewLifecycleOwner, Observer {
+        viewModel.observableTransactions.observe(viewLifecycleOwner, Observer {
             mAdapter.setTransactionsList(it)
         })
 
         viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
-            fragment_main_balance.text = it?.balance.toString()
+            fragment_main_balance.text = it?.balance.toString() + context?.resources?.getString(R.string.usd)
             fragment_main_wallet.text = it?.name
         })
 
