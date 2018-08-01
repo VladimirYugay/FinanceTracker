@@ -8,9 +8,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import com.example.vladimir.financetracker.*
+import com.example.vladimir.financetracker.interfaces.IChangeFragmentCallback
 import com.example.vladimir.financetracker.view.fragments.FragmentMain
 
-class ActivityMain : AppCompatActivity() {
+class ActivityMain : AppCompatActivity(), IChangeFragmentCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,14 @@ class ActivityMain : AppCompatActivity() {
 
     private fun loadFragmentWithoutBackStack(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    }
+
+    override fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
+                .replace(R.id.container, fragment)
+                .addToBackStack(fragment.javaClass.name)
+                .commit()
     }
 
 }
