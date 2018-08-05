@@ -1,18 +1,19 @@
 package com.example.vladimir.financetracker.view.fragments
 
+import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.createId
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_transaction.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FragmentAddTransaction() : Fragment() {
 
@@ -87,6 +88,22 @@ class FragmentAddTransaction() : Fragment() {
 
         fragment_transaction_toolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStackImmediate()
+        }
+
+        fragment_transaction_date.setOnClickListener {
+            val calendar = Calendar.getInstance()
+
+            val dateListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val date = calendar.time
+                val formatted = SimpleDateFormat("dd.MM.yyyy").format(date)
+                fragment_transaction_date.setText(formatted)
+            }
+
+            DatePickerDialog(activity, dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
 }
