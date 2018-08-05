@@ -19,7 +19,7 @@ import java.net.URL
 
 class Repository {
 
-    private val db: AppDatabase = AppDatabase.getDatabase()
+    val db: AppDatabase = AppDatabase.getDatabase()
 
     var USD = 60.0
     val wallets: MutableList<Wallet> = mutableListOf()

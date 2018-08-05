@@ -35,6 +35,8 @@
     <string name="wallet_name_dots">Текущий Кошелек: &#160;</string>
     <string name="existing_wallet">Кошелек с таким именем уже существует</string>
 
+    <string name="error_no_wallet">Сначала выберите кошелёк</string>
+
     <string-array name="currencies">
         <item>Доллары</item>
         <item>Рубли</item>

@@ -8,5 +8,6 @@ import android.arch.persistence.room.PrimaryKey
 data class Wallet(
         @PrimaryKey
         @ColumnInfo(name = "name") var name: String,
-        @ColumnInfo(name = "balance") var balance: Double = 0.0
+        @ColumnInfo(name = "balance") var balance: Double = 0.0,
+        @ColumnInfo(name = "isDefault") var isDefault: Boolean = false
 )

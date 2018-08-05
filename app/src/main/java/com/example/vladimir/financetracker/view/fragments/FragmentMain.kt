@@ -10,7 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.alertError
 import com.example.vladimir.financetracker.goTo
+import com.example.vladimir.financetracker.model.entity.Transaction
+import com.example.vladimir.financetracker.model.entity.Wallet
+import com.example.vladimir.financetracker.model.repository.Repository
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -55,6 +59,15 @@ class FragmentMain : Fragment() {
             }
         })
 
+        Repository.instance.walletsLd.observe(viewLifecycleOwner, Observer {
+            mViewModel.observableWallets.value = it as MutableList<Wallet>?
+            mViewModel.observableWallet.value = it?.firstOrNull()
+        })
+
+        Repository.instance.transactionsLd.observe(viewLifecycleOwner, Observer {
+            mViewModel.observableTransactions.value = it as MutableList<Transaction>?
+        })
+
     }
 
     private fun initComponents() {
@@ -66,7 +79,12 @@ class FragmentMain : Fragment() {
 
     private fun initComponentsListeners() {
         fab.setOnClickListener {
-            goTo(context, Routes.ADD_TRANSACTION_FRAGMENT)
+            if (mViewModel.observableWallet.value != null) {
+                goTo(context, Routes.ADD_TRANSACTION_FRAGMENT)
+            }
+            else {
+                alertError(activity!!, R.string.error_no_wallet)
+            }
         }
         bottom_appbar.setNavigationOnClickListener {
             goTo(context, Routes.WALLETS_FRAGMENT)

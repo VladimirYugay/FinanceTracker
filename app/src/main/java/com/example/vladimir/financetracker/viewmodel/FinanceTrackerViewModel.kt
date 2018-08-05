@@ -37,12 +37,23 @@ class FinanceTrackerViewModel : ViewModel() {
         Repository.instance.wallets.forEach {
             if (it.name == wallet.name) return false
         }
+
+        Repository.instance.db.walletDao().insert(wallet)
+        observableWallets.value?.add(wallet)
+        observableWallet.value = wallet
+
         Repository.instance.wallets.add(wallet)
         return true
     }
 
     fun addTransaction(transaction: Transaction) {
         observableWallet.value!!.balance += transaction.value
+
+        Repository.instance.db.transactionDao().insert(transaction)
+        if (transaction.wallet == observableWallet.value!!.name) {
+            observableTransactions.value!!.add(transaction)
+        }
+
         Repository.instance.transactions.add(transaction.copy(wallet = observableWallet.value!!.name))
     }
 }
