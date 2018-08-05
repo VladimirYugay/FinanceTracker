@@ -45,8 +45,14 @@ class FragmentMain : Fragment() {
         })
 
         viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
-            fragment_main_balance.text = it?.balance.toString() + context?.resources?.getString(R.string.usd)
-            fragment_main_wallet.text = it?.name
+            if (it != null) {
+                fragment_main_balance.text = it?.balance.toString() + context?.resources?.getString(R.string.usd)
+                fragment_main_wallet.text = it?.name
+            }
+            else {
+                fragment_main_balance.text = "Нет"
+                fragment_main_wallet.text = "Нет"
+            }
         })
 
     }

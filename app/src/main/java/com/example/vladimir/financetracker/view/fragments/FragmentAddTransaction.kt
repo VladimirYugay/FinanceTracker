@@ -73,7 +73,7 @@ class FragmentAddTransaction() : Fragment() {
                 var value = fragment_transaction_value.text.toString().toDouble()
                 if(fragment_transaction_expendture.isChecked) value = -value
                 if(fragment_transaction_currency.equals(currency.first())) value /= mViewModel.getUSD()
-                mViewModel.addTransaction(Transaction(createId(),
+                mViewModel.addTransaction(Transaction(
                         fragment_transaction_name.text.toString(),
                         fragment_transaction_expendture.isChecked,
                         fragment_transaction_currency.selectedItem.toString(),

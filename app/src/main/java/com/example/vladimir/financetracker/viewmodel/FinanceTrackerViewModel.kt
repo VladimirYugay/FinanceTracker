@@ -12,11 +12,11 @@ class FinanceTrackerViewModel : ViewModel() {
 
     val observableWallets: MutableLiveData<MutableList<Wallet>> = MutableLiveData()
     val observableTransactions: MutableLiveData<MutableList<Transaction>> = MutableLiveData()
-    val observableWallet: MutableLiveData<Wallet> = MutableLiveData()
+    val observableWallet: MutableLiveData<Wallet?> = MutableLiveData()
 
     init {
         Repository.instance.initData()
-        observableWallet.value = Repository.instance.wallets.first()
+        observableWallet.value = Repository.instance.wallets.firstOrNull()
         observableWallets.value = Repository.instance.wallets
         observableTransactions.value = Repository.instance.transactions
     }
