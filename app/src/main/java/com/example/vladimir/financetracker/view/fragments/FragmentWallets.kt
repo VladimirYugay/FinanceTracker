@@ -5,15 +5,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.Routes
-import com.example.vladimir.financetracker.goTo
 import com.example.vladimir.financetracker.interfaces.IChangeFragmentCallback
-import com.example.vladimir.financetracker.model.entity.Wallet
 import com.example.vladimir.financetracker.view.activities.ActivityMain
 import com.example.vladimir.financetracker.view.adapters.AdapterWallets
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
@@ -81,5 +79,16 @@ class FragmentWallets : Fragment() {
                 false
             }
         }
+
+        view_pager_fragment_wallets.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(p0: Int) {}
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+            override fun onPageSelected(p0: Int) {
+                val fragmentWallet = mWalletsAdapter.getItem(p0) as FragmentWallet
+                fragmentWallet.currentWalletName?.let {
+                    mViewModel.changeWallet(it)
+                }
+            }
+        })
     }
 }
