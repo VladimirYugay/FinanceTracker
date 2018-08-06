@@ -112,13 +112,10 @@ class FinanceTrackerViewModel : ViewModel() {
 
         wallets.forEach {
             if (it.name == observableWallet.value!!.name) {
-                it.balance += transaction.value
+                it.balance += newTransaction.value
                 db.walletDao().update(it)
                 setWallet(it)
             }
         }
-
-        observableTransactions.value?.add(newTransaction)
-        observableWallet.value!!.balance += transaction.value
     }
 }
