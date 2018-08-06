@@ -46,14 +46,14 @@
             app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/item_transactions_list_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_clothes"
+            android:text="@{transaction.category.toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_value" />
 
         <TextView
