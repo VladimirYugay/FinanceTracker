@@ -43,3 +43,5 @@ fun alertError(context: Context, message: String) {
 fun alertError(context: Context, @StringRes id: Int) {
     alertError(context, getString(id))
 }
+
+fun Double.fmtMoney() = String.format("%.2f", this).replace(",", ".")

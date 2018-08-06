@@ -106,7 +106,19 @@ class FinanceTrackerViewModel : ViewModel() {
     }
 
     fun addTransaction(transaction: Transaction) {
-        val newTransaction = transaction.copy(wallet = observableWallet.value!!.name)
+        var newTransaction : Transaction? = null
+        if (transaction.currency == observableWallet.value?.currency) {
+            newTransaction = transaction.copy(wallet = observableWallet.value!!.name)
+        }
+        else {
+            if (transaction.currency == "USD" && observableWallet.value?.currency == "RUB") {
+                newTransaction = transaction.copy(currency = "RUB", value = transaction.value * USD, wallet = observableWallet.value!!.name)
+            }
+            else {
+                newTransaction = transaction.copy(currency = "USD", value = transaction.value / USD, wallet = observableWallet.value!!.name)
+            }
+        }
+
         db.transactionDao().insert(newTransaction)
         transactions.add(newTransaction)
 

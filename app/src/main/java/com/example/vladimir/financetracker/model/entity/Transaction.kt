@@ -16,4 +16,6 @@ data class Transaction(
 ) {
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true) var id: Long = 0
+
+    fun formattedValue() = String.format("%.2f", value).replace(",",".")
 }

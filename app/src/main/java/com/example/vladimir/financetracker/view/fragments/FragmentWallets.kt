@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.fmtMoney
 import com.example.vladimir.financetracker.interfaces.IChangeFragmentCallback
 import com.example.vladimir.financetracker.view.activities.ActivityMain
 import com.example.vladimir.financetracker.view.adapters.AdapterWallets
@@ -50,7 +51,7 @@ class FragmentWallets : Fragment() {
                 val fragment = FragmentWallet()
                 val bundle = Bundle()
                 bundle.putString(Constants.NAME, it.name)
-                bundle.putString(Constants.BALANCE, it.balance.toString())
+                bundle.putString(Constants.BALANCE, it.balance.fmtMoney())
                 fragment.arguments = bundle
                 mWalletsAdapter.addFragment(fragment)
                 mWalletsAdapter.notifyDataSetChanged()

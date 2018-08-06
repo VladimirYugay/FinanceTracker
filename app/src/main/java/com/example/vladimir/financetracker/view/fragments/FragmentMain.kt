@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vladimir.financetracker.Routes
-import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.alertError
-import com.example.vladimir.financetracker.goTo
+import com.example.vladimir.financetracker.*
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -44,7 +41,7 @@ class FragmentMain : Fragment() {
 
         viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                fragment_main_balance.text = "${it?.balance} ${getString(R.string.rub)}"
+                fragment_main_balance.text = "${it?.balance.fmtMoney()} ${if (it?.currency == "USD") getString(R.string.usd) else getString(R.string.rub)}"
                 fragment_main_wallet.text = it?.name
             }
             else {
