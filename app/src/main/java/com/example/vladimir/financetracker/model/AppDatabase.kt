@@ -27,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getDatabase(): AppDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(FinanceTrackerApplication.INSTANCE, AppDatabase::class.java, "ftdb")
-                        .allowMainThreadQueries()
+                        .allowMainThreadQueries() // todo remove after debugging
                         .build()
             }
             return INSTANCE!!

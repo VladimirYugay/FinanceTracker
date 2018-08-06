@@ -1,6 +1,5 @@
 package com.example.vladimir.financetracker.view.fragments
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,9 +11,6 @@ import com.example.vladimir.financetracker.Routes
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.alertError
 import com.example.vladimir.financetracker.goTo
-import com.example.vladimir.financetracker.model.entity.Transaction
-import com.example.vladimir.financetracker.model.entity.Wallet
-import com.example.vladimir.financetracker.model.repository.Repository
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -33,14 +29,12 @@ class FragmentMain : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initComponents()
         initComponentsListeners()
     }
-
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
 
@@ -58,16 +52,6 @@ class FragmentMain : Fragment() {
                 fragment_main_wallet.text = "Нет"
             }
         })
-
-        Repository.instance.walletsLd.observe(viewLifecycleOwner, Observer {
-            mViewModel.observableWallets.value = it as MutableList<Wallet>?
-            mViewModel.observableWallet.value = it?.firstOrNull()
-        })
-
-        Repository.instance.transactionsLd.observe(viewLifecycleOwner, Observer {
-            mViewModel.observableTransactions.value = it as MutableList<Transaction>?
-        })
-
     }
 
     private fun initComponents() {
@@ -107,5 +91,4 @@ class FragmentMain : Fragment() {
             }
         }
     }
-
 }

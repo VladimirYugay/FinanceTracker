@@ -1,6 +1,5 @@
 package com.example.vladimir.financetracker.model.dao
 
-import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.example.vladimir.financetracker.model.entity.Wallet
@@ -9,8 +8,8 @@ import com.example.vladimir.financetracker.model.entity.Wallet
 interface WalletDao : BaseDao<Wallet> {
 
     @Query("SELECT * FROM wallet")
-    fun getAll(): LiveData<List<Wallet>>
+    fun getAll(): List<Wallet>
 
     @Query("SELECT * FROM wallet WHERE name = :name")
-    fun getById(name: String): LiveData<Wallet>
+    fun getById(name: String): Wallet
 }
