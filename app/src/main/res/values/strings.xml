@@ -35,6 +35,15 @@
     <string name="wallet_name_dots">Текущий Кошелек: &#160;</string>
     <string name="existing_wallet">Кошелек с таким именем уже существует</string>
 
+    <string name="error_no_wallet">Сначала выберите кошелёк</string>
+
+    <string name="text_settings_stub">Здесь могли быть ваши настройки</string>
+
+    <string name="text_info_about_app_general">Домашнее задание летней школы мобильной разработки Яндекса 2018 г.</string>
+    <string name="text_info_about_app_contacts">Автор: Павел Васильев\n\nСвязаться с автором:</string>
+    <string name="text_info_about_app_email_subject">О приложении школы мобильной разработки Яндекса</string>
+    <string name="text_info_about_app_email_no_client">Почтовый клиент не найден</string>
+
     <string-array name="currencies">
         <item>Доллары</item>
         <item>Рубли</item>
