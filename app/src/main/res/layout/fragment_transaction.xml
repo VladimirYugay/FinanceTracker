@@ -15,32 +15,71 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/add_transaction"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        />
 
-    <TextView
-        android:id="@+id/fragment_transaction_type_label"
+    <!--<TextView-->
+        <!--android:id="@+id/fragment_transaction_type_label"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/fragment_transaction_expendture"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/fragment_transaction_expendture"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="Расход"-->
+        <!--android:textSize="18sp"-->
+        <!--android:textColor="?android:textColorHint"/>-->
+
+    <RadioGroup
+        android:id="@+id/radio_group_operation_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="1dp"
+        android:background="@drawable/bg_radio_group_toggle"
         app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_transaction_expendture"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_transaction_expendture"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/expenditure"
-        android:textSize="18sp"
-        android:textColor="?android:textColorHint"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <CheckBox
-        android:id="@+id/fragment_transaction_expendture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_operation_type_out"
+            style="@style/RadioButton.Toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_operation_type_out"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_operation_type_in"
+            style="@style/RadioButton.Toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_operation_type_in"
+            />
+
+    </RadioGroup>
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/fragment_transaction_expendture"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginStart="16dp"/>-->
 
 
     <Spinner
@@ -52,7 +91,8 @@
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_type_label" />
+        app:layout_constraintTop_toBottomOf="@+id/radio_group_operation_type"
+        />
 
 
     <android.support.design.widget.TextInputLayout

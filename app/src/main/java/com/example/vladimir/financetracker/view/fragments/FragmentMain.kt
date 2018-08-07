@@ -33,6 +33,11 @@ class FragmentMain : Fragment() {
         initComponentsListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        hideSoftKeyboard()
+    }
+
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
 
         viewModel.observableTransactions.observe(viewLifecycleOwner, Observer {
@@ -45,8 +50,8 @@ class FragmentMain : Fragment() {
                 fragment_main_wallet.text = it?.name
             }
             else {
-                fragment_main_balance.text = "Нет"
-                fragment_main_wallet.text = "Нет"
+                fragment_main_balance.text = getString(R.string.text_no)
+                fragment_main_wallet.text = getString(R.string.text_no)
             }
         })
     }

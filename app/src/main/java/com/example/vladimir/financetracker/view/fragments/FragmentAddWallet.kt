@@ -1,8 +1,6 @@
 package com.example.vladimir.financetracker.view.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,17 +9,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.createId
+import com.example.vladimir.financetracker.getStringArray
 import com.example.vladimir.financetracker.model.entity.Wallet
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_add_wallet.*
-import kotlinx.android.synthetic.main.fragment_transaction.*
 
 class FragmentAddWallet : Fragment(){
 
-    val currency = arrayOf("Рубли", "Доллары")
+    val currency = getStringArray(R.array.currencies)
     val currencyValues = arrayOf("RUB", "USD")
     var selectedCurrency : String? = currencyValues[0]
 

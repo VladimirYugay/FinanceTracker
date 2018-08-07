@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.getStringArray
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_transaction.*
@@ -20,12 +21,12 @@ class FragmentAddTransaction() : Fragment() {
 
     lateinit var mViewModel: FinanceTrackerViewModel
 
-    val currency = arrayOf("Рубли", "Доллары")
+    val currency = getStringArray(R.array.currencies)
     val currencyValues = arrayOf("RUB", "USD")
     var selectedCurrency = currencyValues[0]
 
-    val categoryExpenditure = arrayOf("Еда", "Одежда", "Развлечения", "Другое")
-    val categoryProfit = arrayOf("Зарплата", "Воровство", "Взяточничество", "Другое")
+    val categoryExpenditure = getStringArray(R.array.categories_in)
+    val categoryProfit = getStringArray(R.array.categories_out)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +40,13 @@ class FragmentAddTransaction() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initComponents()
         initComponentsListeners()
+
+        radio_group_operation_type.check(R.id.radio_operation_type_out)
     }
 
     private fun initComponents() {
-
         fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, categoryExpenditure) {
         }
@@ -53,18 +54,16 @@ class FragmentAddTransaction() : Fragment() {
         fragment_transaction_currency.adapter = object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, currency) {
         }
-
     }
 
-
     private fun initComponentsListeners() {
-
-        fragment_transaction_expendture.setOnClickListener {
-            if(fragment_transaction_expendture.isChecked){
+        radio_group_operation_type.setOnCheckedChangeListener { radioGroup, i ->
+            if(i == R.id.radio_operation_type_out) {
                 fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryExpenditure) {
                 }
-            }else{
+            }
+            else {
                 fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryProfit) {
                 }
@@ -77,11 +76,11 @@ class FragmentAddTransaction() : Fragment() {
                     && fragment_transaction_date.text.toString().isNotBlank()) {
 
                 var value = fragment_transaction_value.text.toString().toDouble()
-                if(fragment_transaction_expendture.isChecked) value = -value
+                if(radio_operation_type_out.isChecked) value = -value
                 if(fragment_transaction_currency.equals(currency.first())) value /= mViewModel.getUSD()
                 mViewModel.addTransaction(Transaction(
                         fragment_transaction_name.text.toString(),
-                        fragment_transaction_expendture.isChecked,
+                        radio_operation_type_out.isChecked,
                         selectedCurrency,
                         fragment_transaction_category.selectedItem.toString(),
                         value,
