@@ -12,7 +12,6 @@ import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.getStringArray
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
-import com.jaredrummler.materialspinner.MaterialSpinner
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,7 +22,9 @@ class FragmentAddTransaction() : Fragment() {
 
     val currency = getStringArray(R.array.currencies)
     val currencyValues = arrayOf("RUB", "USD")
+
     var selectedCurrency = currencyValues[0]
+    var selectedDate = Date() // todo date to db
 
     val categoryExpenditure = getStringArray(R.array.categories_in)
     val categoryProfit = getStringArray(R.array.categories_out)
@@ -43,7 +44,9 @@ class FragmentAddTransaction() : Fragment() {
         initComponents()
         initComponentsListeners()
 
+        fragment_transaction_date.setText(SimpleDateFormat.getDateInstance().format(Date()))
         radio_group_operation_type.check(R.id.radio_operation_type_out)
+        fragment_transaction_currency.selectedIndex = if (mViewModel.observableWallet.value?.currency == "USD") 1 else 0
     }
 
     private fun initComponents() {
@@ -103,17 +106,16 @@ class FragmentAddTransaction() : Fragment() {
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
                 val date = calendar.time
-                val formatted = SimpleDateFormat("dd.MM.yyyy").format(date)
+                selectedDate = date
+                val formatted = SimpleDateFormat.getDateInstance().format(date)
                 fragment_transaction_date.setText(formatted)
             }
 
             DatePickerDialog(activity, dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        fragment_transaction_currency.setOnItemSelectedListener(object : MaterialSpinner.OnItemSelectedListener<String> {
-            override fun onItemSelected(view: MaterialSpinner?, position: Int, id: Long, item: String?) {
-                selectedCurrency = currencyValues[position]
-            }
-        })
+        fragment_transaction_currency.setOnItemSelectedListener { view, position, id, item ->
+            selectedCurrency = currencyValues[position]
+        }
     }
 }
