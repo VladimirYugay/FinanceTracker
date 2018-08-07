@@ -7,12 +7,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.getStringArray
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
+import com.jaredrummler.materialspinner.MaterialSpinner
 import kotlinx.android.synthetic.main.fragment_transaction.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,26 +47,26 @@ class FragmentAddTransaction() : Fragment() {
     }
 
     private fun initComponents() {
-        fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+        fragment_transaction_category.setAdapter(object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, categoryExpenditure) {
-        }
+        })
 
-        fragment_transaction_currency.adapter = object : ArrayAdapter<String>(context,
+        fragment_transaction_currency.setAdapter(object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, currency) {
-        }
+        })
     }
 
     private fun initComponentsListeners() {
         radio_group_operation_type.setOnCheckedChangeListener { radioGroup, i ->
             if(i == R.id.radio_operation_type_out) {
-                fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+                fragment_transaction_category.setAdapter(object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryExpenditure) {
-                }
+                })
             }
             else {
-                fragment_transaction_category.adapter = object : ArrayAdapter<String>(context,
+                fragment_transaction_category.setAdapter(object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryProfit) {
-                }
+                })
             }
         }
 
@@ -82,7 +82,7 @@ class FragmentAddTransaction() : Fragment() {
                         fragment_transaction_name.text.toString(),
                         radio_operation_type_out.isChecked,
                         selectedCurrency,
-                        fragment_transaction_category.selectedItem.toString(),
+                        fragment_transaction_category.getItems<String>()[fragment_transaction_category.selectedIndex].toString(),
                         value,
                         fragment_transaction_date.text.toString(),
                 ""))
@@ -110,14 +110,10 @@ class FragmentAddTransaction() : Fragment() {
             DatePickerDialog(activity, dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        fragment_transaction_currency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedCurrency = currencyValues[0]
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        fragment_transaction_currency.setOnItemSelectedListener(object : MaterialSpinner.OnItemSelectedListener<String> {
+            override fun onItemSelected(view: MaterialSpinner?, position: Int, id: Long, item: String?) {
                 selectedCurrency = currencyValues[position]
             }
-        }
+        })
     }
 }

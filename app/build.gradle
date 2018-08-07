@@ -35,6 +35,8 @@ dependencies {
     implementation deps.support.constraint
     implementation deps.support.recycler
 
+    implementation deps.view.materialspinner
+
     implementation deps.pie_chart
     implementation deps.coroutines
     implementation deps.okhttp
