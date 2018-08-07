@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.vladimir.financetracker.Constants
@@ -21,6 +22,9 @@ import kotlinx.android.synthetic.main.fragment_transaction.*
 class FragmentAddWallet : Fragment(){
 
     val currency = arrayOf("Рубли", "Доллары")
+    val currencyValues = arrayOf("RUB", "USD")
+    var selectedCurrency : String? = currencyValues[0]
+
     lateinit var mViewModel: FinanceTrackerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +59,13 @@ class FragmentAddWallet : Fragment(){
                     mViewModel.changeWallet(fragment_add_wallet_name.text.toString())
                 }
 
-                if(mViewModel.addWallet(Wallet(fragment_add_wallet_name.text.toString(),
-                        fragment_add_wallet_value.text.toString().toDouble()))){
+                if(mViewModel.addWallet(
+                        Wallet(
+                                fragment_add_wallet_name.text.toString(),
+                                fragment_add_wallet_value.text.toString().toDouble(),
+                                selectedCurrency!!
+                        )
+                )){
                     fragmentManager?.popBackStackImmediate()
                 }else{
                     Toast.makeText(context, R.string.existing_wallet, Toast.LENGTH_SHORT).show()
@@ -67,6 +76,16 @@ class FragmentAddWallet : Fragment(){
 
         fragment_add_wallet_toolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStackImmediate()
+        }
+
+        fragment_add_wallet_currency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                selectedCurrency = currencyValues[0]
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedCurrency = currencyValues[position]
+            }
         }
     }
 }

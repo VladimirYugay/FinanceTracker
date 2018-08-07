@@ -44,6 +44,9 @@ dependencies {
     implementation deps.arch.lifecycle_extension
     kapt deps.databinding_compiler
 
+    implementation deps.arch.room
+    kapt deps.arch.roomc
+
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.espresso.core
