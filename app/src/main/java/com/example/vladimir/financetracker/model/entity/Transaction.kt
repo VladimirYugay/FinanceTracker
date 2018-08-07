@@ -3,6 +3,7 @@ package com.example.vladimir.financetracker.model.entity
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.example.vladimir.financetracker.fmtMoney
 
 @Entity(tableName = "tx")
 data class Transaction(
@@ -17,5 +18,5 @@ data class Transaction(
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true) var id: Long = 0
 
-    fun formattedValue() = String.format("%.2f", value).replace(",",".")
+    fun formattedValue() = value.fmtMoney()
 }

@@ -26,6 +26,9 @@ class FragmentAddTransaction() : Fragment() {
     var selectedCurrency = currencyValues[0]
     var selectedDate = Date() // todo date to db
 
+    var categories: Array<String>? = null
+    var selectedCategory = ""
+
     val categoryExpenditure = getStringArray(R.array.categories_in)
     val categoryProfit = getStringArray(R.array.categories_out)
 
@@ -46,7 +49,11 @@ class FragmentAddTransaction() : Fragment() {
 
         fragment_transaction_date.setText(SimpleDateFormat.getDateInstance().format(Date()))
         radio_group_operation_type.check(R.id.radio_operation_type_out)
-        fragment_transaction_currency.selectedIndex = if (mViewModel.observableWallet.value?.currency == "USD") 1 else 0
+
+        val defaultCurrencyUsd = mViewModel.observableWallet.value?.currency == "USD"
+        fragment_transaction_currency.selectedIndex = if (defaultCurrencyUsd) 1 else 0
+        selectedCurrency = currencyValues[if (defaultCurrencyUsd) 1 else 0]
+        categories = categoryExpenditure
     }
 
     private fun initComponents() {
@@ -62,11 +69,13 @@ class FragmentAddTransaction() : Fragment() {
     private fun initComponentsListeners() {
         radio_group_operation_type.setOnCheckedChangeListener { radioGroup, i ->
             if(i == R.id.radio_operation_type_out) {
+                categories = categoryExpenditure
                 fragment_transaction_category.setAdapter(object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryExpenditure) {
                 })
             }
             else {
+                categories = categoryProfit
                 fragment_transaction_category.setAdapter(object : ArrayAdapter<String>(context,
                         R.layout.spinner_item, categoryProfit) {
                 })
@@ -85,7 +94,7 @@ class FragmentAddTransaction() : Fragment() {
                         fragment_transaction_name.text.toString(),
                         radio_operation_type_out.isChecked,
                         selectedCurrency,
-                        fragment_transaction_category.getItems<String>()[fragment_transaction_category.selectedIndex].toString(),
+                        if (selectedCategory.isNotBlank()) selectedCategory else categories!![0],
                         value,
                         fragment_transaction_date.text.toString(),
                 ""))
@@ -116,6 +125,10 @@ class FragmentAddTransaction() : Fragment() {
 
         fragment_transaction_currency.setOnItemSelectedListener { view, position, id, item ->
             selectedCurrency = currencyValues[position]
+        }
+
+        fragment_transaction_category.setOnItemSelectedListener { view, position, id, item ->
+            selectedCategory = item.toString()
         }
     }
 }

@@ -3,8 +3,10 @@ package com.example.vladimir.financetracker
 import android.content.Context
 import android.content.Intent
 import android.support.annotation.ArrayRes
+import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.view.inputmethod.InputMethodManager
 import com.example.vladimir.financetracker.view.activities.ActivityMain
@@ -19,6 +21,8 @@ fun getString(@StringRes id: Int) = FinanceTrackerApplication.INSTANCE.getString
 
 fun getStringArray(@ArrayRes id: Int) = FinanceTrackerApplication.INSTANCE.resources.getStringArray(id)
 
+fun getColor(@ColorRes id: Int) = ContextCompat.getColor(FinanceTrackerApplication.INSTANCE, id)
+
 fun alertError(context: Context, message: String) {
     AlertDialog.Builder(context)
             .setTitle(getString(R.string.text_error))
@@ -32,7 +36,16 @@ fun alertError(context: Context, @StringRes id: Int) {
     alertError(context, getString(id))
 }
 
-fun Double.fmtMoney() = String.format("%.2f", this).replace(",", ".")
+fun Double.fmtMoney(): String {
+    var value = String.format("%.2f", Math.abs(this)).replace(",", ".")
+    if (this > 0) {
+        value = "+ " + value
+    }
+    else if (this < 0) {
+        value = "- " + value
+    }
+    return value
+}
 
 fun Fragment.hideSoftKeyboard() {
     activity?.let {

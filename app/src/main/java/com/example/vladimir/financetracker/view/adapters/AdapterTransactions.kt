@@ -3,7 +3,10 @@ package com.example.vladimir.financetracker.view.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.vladimir.financetracker.R
 import com.example.vladimir.financetracker.databinding.ItemTransactionsListBinding
+import com.example.vladimir.financetracker.getColor
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.model.entity.Wallet
 
@@ -38,6 +41,7 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
         fun bind(transaction: Transaction) {
             binding.transaction = transaction
             binding.executePendingBindings()
+            itemView.findViewById<TextView>(R.id.item_transactions_list_value).setTextColor(if (transaction.value < 0) getColor(R.color.color_negative) else getColor(R.color.color_positive))
         }
     }
 }

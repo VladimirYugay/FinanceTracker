@@ -46,12 +46,13 @@ class FragmentMain : Fragment() {
 
         viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                fragment_main_balance.text = "${it?.balance.fmtMoney()} ${if (it?.currency == "USD") getString(R.string.usd) else getString(R.string.rub)}"
-                fragment_main_wallet.text = it?.name
+                fragment_main_balance.text = it.balance.fmtMoney()
+                fragment_main_balance.setTextColor(if (it.balance < 0) getColor(R.color.color_negative) else getColor(R.color.color_positive))
+                fragment_main_wallet.text = it.name
+                fragment_main_currency.text = if (it.currency == "USD") getString(R.string.usd) else getString(R.string.rub)
             }
             else {
                 fragment_main_balance.text = getString(R.string.text_no)
-                fragment_main_wallet.text = getString(R.string.text_no)
             }
         })
     }

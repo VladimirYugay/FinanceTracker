@@ -9,8 +9,9 @@
     <string name="about_app">О приложении</string>
     <string name="settings">Настройки</string>
 
-    <string name="rub">RUB</string>
-    <string name="usd">USD</string>
+    <string name="rub">\u20BD</string>
+    <string name="usd">$</string>
+
     <string name="balance_message">%1$s %2$s</string>
     <string name="add_transaction">Добавить Транзакцию</string>
     <string name="value">Стоимость</string>
