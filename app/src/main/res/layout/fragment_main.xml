@@ -110,8 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimary"
-        app:fabAttached="true"
-        app:fabCradleMargin="8dp"
+        app:fabAttached="false"
         app:navigationIcon="@drawable/ic_wallet"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -122,9 +121,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
         android:src="@drawable/ic_add"
-        app:layout_anchor="@+id/bottom_appbar" />
-
+        />
 
 </android.support.design.widget.CoordinatorLayout>
