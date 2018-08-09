@@ -16,19 +16,21 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/my_wallets"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager_fragment_wallets"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_wallets"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_wallets_toolbar"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/fragment_wallets_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <android.support.design.widget.FloatingActionButton
     android:id="@+id/fragment_wallets_ok"
