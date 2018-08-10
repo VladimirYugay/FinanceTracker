@@ -17,6 +17,7 @@
 
     <string name="balance_message">%1$s %2$s</string>
     <string name="add_transaction">Add transaction</string>
+    <string name="edit_transaction">Edit transaction</string>
     <string name="value">Amount</string>
     <string name="statistics">Statistics</string>
     <string name="name">Name</string>

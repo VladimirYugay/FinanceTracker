@@ -35,6 +35,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/item_transactions_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{transaction.name}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/regular_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+            />
 
         <TextView
             android:id="@+id/item_transactions_list_value"
@@ -47,7 +62,7 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/headline_text_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_name"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView

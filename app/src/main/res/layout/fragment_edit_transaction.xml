@@ -14,7 +14,7 @@
         android:minHeight="?attr/actionBarSize"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/add_transaction"
+        app:title="@string/edit_transaction"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="@android:color/white"
         />

@@ -16,6 +16,7 @@
 
     <string name="balance_message">%1$s %2$s</string>
     <string name="add_transaction">Добавить Транзакцию</string>
+    <string name="edit_transaction">Редактировать транзакцию</string>
     <string name="value">Стоимость</string>
     <string name="statistics">Статистика</string>
     <string name="name">Название</string>

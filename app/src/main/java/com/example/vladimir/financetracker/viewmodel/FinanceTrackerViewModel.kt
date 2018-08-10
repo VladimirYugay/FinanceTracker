@@ -157,7 +157,7 @@ class FinanceTrackerViewModel : ViewModel() {
         db.transactionDao().delete(editedTransaction!!)
         val toDelete= observableTransactions.value?.first { it.id == editedTransaction!!.id }
 //        observableWallet.value!!.balance -= toDelete?.value!!
-        observableWallets.value!!.first { it.name == toDelete!!.wallet }.balance -= toDelete!!.value
+//        observableWallets.value!!.first { it.name == toDelete!!.wallet }.balance -= toDelete!!.value
 
         wallets.first { it.name == observableWallet.value!!.name }.apply {
             this.balance -= editedTransaction!!.value
