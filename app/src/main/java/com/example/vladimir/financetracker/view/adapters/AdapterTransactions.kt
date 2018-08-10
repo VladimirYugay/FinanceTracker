@@ -10,7 +10,9 @@ import com.example.vladimir.financetracker.getColor
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.model.entity.Wallet
 
-class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
+class AdapterTransactions (
+        private val onItemClick: (Transaction) -> Unit
+): RecyclerView.Adapter<AdapterTransactions.ViewHolder>() {
 
     val mTransactionsList = mutableListOf<Transaction>()
     lateinit var mWallet: Wallet
@@ -18,7 +20,7 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterTransactions.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemTransactionsListBinding = ItemTransactionsListBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(itemTransactionsListBinding)
+        return ViewHolder(itemTransactionsListBinding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -29,7 +31,6 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
         return mTransactionsList.size
     }
 
-
     fun setTransactionsList(items: MutableList<Transaction>?) {
         items?.forEach {
             mTransactionsList.add(it)
@@ -37,11 +38,18 @@ class AdapterTransactions : RecyclerView.Adapter<AdapterTransactions.ViewHolder>
         }
     }
 
-    class ViewHolder(val binding: ItemTransactionsListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+            val binding: ItemTransactionsListBinding,
+            private val onItemCilck: (Transaction) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(transaction: Transaction) {
             binding.transaction = transaction
             binding.executePendingBindings()
             itemView.findViewById<TextView>(R.id.item_transactions_list_value).setTextColor(if (transaction.value < 0) getColor(R.color.color_negative) else getColor(R.color.color_positive))
+            itemView.setOnClickListener {
+                onItemCilck.invoke(transaction)
+            }
         }
     }
 }

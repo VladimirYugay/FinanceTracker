@@ -36,6 +36,23 @@ fun alertError(context: Context, @StringRes id: Int) {
     alertError(context, getString(id))
 }
 
+fun alertConfirm(context: Context, message: String, action: (() -> Unit)?) {
+    AlertDialog.Builder(context)
+            .setMessage(message)
+            .setPositiveButton(R.string.text_yes, {dialog, _ ->
+                dialog.dismiss()
+                action?.invoke()
+            })
+            .setNegativeButton(R.string.text_cancel, { dialog, _ ->
+                dialog.dismiss()
+            })
+            .show()
+}
+
+fun alertConfirm(context: Context, @StringRes id: Int, action: (() -> Unit)?) {
+    alertConfirm(context, getString(id), action)
+}
+
 fun Double.fmtMoney(): String {
     var value = String.format("%.2f", Math.abs(this)).replace(",", ".")
     if (this > 0) {

@@ -9,4 +9,7 @@ interface TransactionDao : BaseDao<Transaction> {
 
     @Query("SELECT * FROM tx")
     fun getAll(): List<Transaction>
+
+    @Query("SELECT * FROM tx WHERE id = :id")
+    fun getById(id: Long): Transaction
 }

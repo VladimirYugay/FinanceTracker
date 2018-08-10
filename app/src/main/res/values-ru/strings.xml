@@ -4,6 +4,8 @@
     <string name="text_ok">OK</string>
     <string name="text_error">Ошибка</string>
     <string name="text_no">Нет</string>
+    <string name="text_yes">Да</string>
+    <string name="text_cancel">Отмена</string>
 
     <string name="balance">Баланс</string>
     <string name="about_app">О приложении</string>
@@ -36,10 +38,8 @@
     <string name="text_operation_type_out">Расход</string>
     <string name="text_operation_type_in">Доход</string>
 
-
-
-
-
+    <string name="text_delete_transaction">Удалить</string>
+    <string name="text_delete_confirm">Вы уверены что хотите удалить эту запись?</string>
 
     <string-array name="categories_in">
         <item>Еда</item>

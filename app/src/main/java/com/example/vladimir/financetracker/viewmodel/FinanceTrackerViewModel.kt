@@ -21,6 +21,8 @@ class FinanceTrackerViewModel : ViewModel() {
     val observableTransactions: MutableLiveData<MutableList<Transaction>> = MutableLiveData()
     val observableWallet: MutableLiveData<Wallet?> = MutableLiveData()
 
+    private var editedTransaction: Transaction? = null
+
     private var USD = 60.0
 
     init {
@@ -129,5 +131,41 @@ class FinanceTrackerViewModel : ViewModel() {
                 setWallet(it)
             }
         }
+    }
+
+    fun getEditedTransaction() = editedTransaction
+
+    fun setEditedTransaction(transaction: Transaction) {
+        this.editedTransaction = transaction
+    }
+
+    fun getTransactionDataById(transactionId: Long) = db.transactionDao().getById(transactionId)
+
+    fun updateTransaction(transaction: Transaction) {
+        editedTransaction?.name = transaction.name
+        editedTransaction?.value = transaction.value
+        editedTransaction?.category = transaction.category
+        editedTransaction?.currency = transaction.currency
+        editedTransaction?.date = transaction.date
+        editedTransaction?.expenditure = transaction.expenditure
+
+        db.transactionDao().update(editedTransaction!!)
+        observableTransactions.value?.set(observableTransactions.value!!.indexOfFirst { it.id == editedTransaction!!.id }, editedTransaction!!)
+    }
+
+    fun deleteEditedTransaction() {
+        db.transactionDao().delete(editedTransaction!!)
+        val toDelete= observableTransactions.value?.first { it.id == editedTransaction!!.id }
+//        observableWallet.value!!.balance -= toDelete?.value!!
+        observableWallets.value!!.first { it.name == toDelete!!.wallet }.balance -= toDelete!!.value
+
+        wallets.first { it.name == observableWallet.value!!.name }.apply {
+            this.balance -= editedTransaction!!.value
+            db.walletDao().update(this)
+            setWallet(this)
+        }
+
+        observableTransactions.value?.remove(toDelete)
+        editedTransaction = null
     }
 }

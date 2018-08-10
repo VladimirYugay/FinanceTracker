@@ -58,7 +58,10 @@ class FragmentMain : Fragment() {
     }
 
     private fun initComponents() {
-        mAdapter = AdapterTransactions()
+        mAdapter = AdapterTransactions {
+            mViewModel.setEditedTransaction(it)
+            goTo(context, Routes.EDIT_TRANSACTION_FRAGMENT)
+        }
         recycler_fragment_main.adapter = mAdapter
         observeViewModel(mViewModel)
         bottom_appbar.replaceMenu(R.menu.menu_main)

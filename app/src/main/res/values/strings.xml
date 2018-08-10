@@ -5,6 +5,8 @@
     <string name="text_ok">OK</string>
     <string name="text_error">Error</string>
     <string name="text_no">No</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_cancel">Cancel</string>
 
     <string name="balance">Balance</string>
     <string name="about_app">About app</string>
@@ -36,6 +38,9 @@
 
     <string name="text_operation_type_out">Expense</string>
     <string name="text_operation_type_in">Income</string>
+
+    <string name="text_delete_transaction">Delete</string>
+    <string name="text_delete_confirm">Are you sure you want to delete this transaction?</string>
 
     <string-array name="currencies">
         <item>RUB</item>
