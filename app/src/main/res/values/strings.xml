@@ -29,9 +29,11 @@
     <string name="existing_wallet">Wallet with this name already exists</string>
     <string name="error_no_wallet">Select a wallet first</string>
 
-    <string name="text_settings_stub">Your settings</string>
+    <string name="text_settings_language">Select language:</string>
+    <string name="text_settings_language_english">English</string>
+    <string name="text_settings_language_russian">Russian</string>
 
-    <string name="text_info_about_app_general">Yandex modile developer summer school 2018 homework application</string>
+    <string name="text_info_about_app_general">Yandex mobile developer summer school 2018 homework application</string>
     <string name="text_info_about_app_contacts">Made by: Pavel Vasiliev\n\nContact me:</string>
     <string name="text_info_about_app_email_subject">Yandex mobile dev school application</string>
     <string name="text_info_about_app_email_no_client">EMail client not found</string>

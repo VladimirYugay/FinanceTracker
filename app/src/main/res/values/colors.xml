@@ -5,9 +5,10 @@
     <color name="colorPrimaryLight">#4A6572</color>
     <color name="colorAccent">#FFCC00</color>
     <color name="colorAccentLight">#ffe082</color>
-    <color name="backgroundColor">#ECEFF1</color>
     <color name="colorWhite">#FFFFFF</color>
 
+    <color name="backgroundColor">#ECEFF1</color>
+    <color name="color_separator">#bdbdbd</color>
     <color name="color_bg_light">#dce2e6</color>
 
     <color name="color_positive">@android:color/holo_green_light</color>
