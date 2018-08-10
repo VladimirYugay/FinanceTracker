@@ -8,6 +8,7 @@ class Router {
     fun navigate(intent: Intent?): Fragment? {
         return when (intent?.getStringExtra(Routes.DESTINATION_FRAGMENT)) {
             Routes.ADD_TRANSACTION_FRAGMENT -> FragmentAddTransaction()
+            Routes.EDIT_TRANSACTION_FRAGMENT -> FragmentEditTransaction()
             Routes.SETTINGS_FRAGMENT -> FragmentSettings()
             Routes.ABOUT_FRAGMENT -> FragmentAbout()
             Routes.WALLETS_FRAGMENT -> FragmentWallets()

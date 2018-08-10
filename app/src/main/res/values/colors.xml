@@ -3,6 +3,21 @@
     <color name="colorPrimary">#344955</color>
     <color name="colorPrimaryDark">#232F34</color>
     <color name="colorPrimaryLight">#4A6572</color>
-    <color name="colorAccent">#F9AA33</color>
+    <color name="colorAccent">#FFCC00</color>
+    <color name="colorAccentLight">#ffe082</color>
+    <color name="colorWhite">#FFFFFF</color>
+
     <color name="backgroundColor">#ECEFF1</color>
+    <color name="color_separator">#bdbdbd</color>
+    <color name="color_bg_light">#dce2e6</color>
+
+    <color name="color_positive">@android:color/holo_green_light</color>
+    <color name="color_negative">@android:color/holo_red_light</color>
+
+    <color name="color_social_button_background">@color/colorPrimary</color>
+    <color name="color_social_button_icon">@color/colorWhite</color>
+
+    <color name="color_radio_toggle_accent">@color/colorWhite</color>
+    <color name="color_radio_toggle_background">@color/colorPrimary</color>
+
 </resources>

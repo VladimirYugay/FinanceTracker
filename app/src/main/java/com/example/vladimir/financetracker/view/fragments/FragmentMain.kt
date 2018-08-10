@@ -1,6 +1,5 @@
 package com.example.vladimir.financetracker.view.fragments
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,9 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vladimir.financetracker.Routes
-import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.goTo
+import com.example.vladimir.financetracker.*
 import com.example.vladimir.financetracker.view.adapters.AdapterTransactions
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -29,7 +26,6 @@ class FragmentMain : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +33,10 @@ class FragmentMain : Fragment() {
         initComponentsListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        hideSoftKeyboard()
+    }
 
     private fun observeViewModel(viewModel: FinanceTrackerViewModel) {
 
@@ -45,14 +45,23 @@ class FragmentMain : Fragment() {
         })
 
         viewModel.observableWallet.observe(viewLifecycleOwner, Observer {
-            fragment_main_balance.text = it?.balance.toString() + context?.resources?.getString(R.string.usd)
-            fragment_main_wallet.text = it?.name
+            if (it != null) {
+                fragment_main_balance.text = it.balance.fmtMoney()
+                fragment_main_balance.setTextColor(if (it.balance < 0) getColor(R.color.color_negative) else getColor(R.color.color_positive))
+                fragment_main_wallet.text = it.name
+                fragment_main_currency.text = if (it.currency == "USD") getString(R.string.usd) else getString(R.string.rub)
+            }
+            else {
+                fragment_main_balance.text = getString(R.string.text_no)
+            }
         })
-
     }
 
     private fun initComponents() {
-        mAdapter = AdapterTransactions()
+        mAdapter = AdapterTransactions {
+            mViewModel.setEditedTransaction(it)
+            goTo(context, Routes.EDIT_TRANSACTION_FRAGMENT)
+        }
         recycler_fragment_main.adapter = mAdapter
         observeViewModel(mViewModel)
         bottom_appbar.replaceMenu(R.menu.menu_main)
@@ -60,7 +69,12 @@ class FragmentMain : Fragment() {
 
     private fun initComponentsListeners() {
         fab.setOnClickListener {
-            goTo(context, Routes.ADD_TRANSACTION_FRAGMENT)
+            if (mViewModel.observableWallet.value != null) {
+                goTo(context, Routes.ADD_TRANSACTION_FRAGMENT)
+            }
+            else {
+                alertError(activity!!, R.string.error_no_wallet)
+            }
         }
         bottom_appbar.setNavigationOnClickListener {
             goTo(context, Routes.WALLETS_FRAGMENT)
@@ -83,5 +97,4 @@ class FragmentMain : Fragment() {
             }
         }
     }
-
 }

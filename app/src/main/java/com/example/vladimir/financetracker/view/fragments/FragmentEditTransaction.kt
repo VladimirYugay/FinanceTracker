@@ -9,14 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.vladimir.financetracker.R
+import com.example.vladimir.financetracker.alertConfirm
 import com.example.vladimir.financetracker.getStringArray
 import com.example.vladimir.financetracker.model.entity.Transaction
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
-import kotlinx.android.synthetic.main.fragment_transaction.*
+import kotlinx.android.synthetic.main.fragment_edit_transaction.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FragmentAddTransaction() : Fragment() {
+class FragmentEditTransaction : Fragment() {
+
+    companion object {
+
+        private const val EXTRA_TRANSACTION_ID = "com.example.vladimir.financetracker.view.fragments.FragmentEditTransaction.transactionId"
+
+        fun newInstance(transactioId: Long): FragmentEditTransaction {
+            val fragment = FragmentEditTransaction()
+            val bundle = Bundle()
+            bundle.putLong(EXTRA_TRANSACTION_ID, transactioId)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     lateinit var mViewModel: FinanceTrackerViewModel
 
@@ -24,7 +38,7 @@ class FragmentAddTransaction() : Fragment() {
     val currencyValues = arrayOf("RUB", "USD")
 
     var selectedCurrency = currencyValues[0]
-    var selectedDate = Date() // todo date to db
+    var selectedDate = Date()
 
     var categories: Array<String>? = null
     var selectedCategory = ""
@@ -32,28 +46,21 @@ class FragmentAddTransaction() : Fragment() {
     val categoryExpenditure = getStringArray(R.array.categories_in)
     val categoryProfit = getStringArray(R.array.categories_out)
 
+    private lateinit var editedTransaction: Transaction
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(activity!!).get(FinanceTrackerViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_transaction, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater.inflate(R.layout.fragment_edit_transaction, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initComponents()
         initComponentsListeners()
-
-        fragment_transaction_date.setText(SimpleDateFormat.getDateInstance().format(Date()))
-        radio_group_operation_type.check(R.id.radio_operation_type_out)
-
-        val defaultCurrencyUsd = mViewModel.observableWallet.value?.currency == "USD"
-        fragment_transaction_currency.selectedIndex = if (defaultCurrencyUsd) 1 else 0
-        selectedCurrency = currencyValues[if (defaultCurrencyUsd) 1 else 0]
-        categories = categoryExpenditure
     }
 
     private fun initComponents() {
@@ -64,6 +71,31 @@ class FragmentAddTransaction() : Fragment() {
         fragment_transaction_currency.setAdapter(object : ArrayAdapter<String>(context,
                 R.layout.spinner_item, currency) {
         })
+
+        editedTransaction = mViewModel.getEditedTransaction()!!
+        editedTransaction?.let { transaction ->
+            if (transaction.expenditure) {
+                radio_group_operation_type.check(R.id.radio_operation_type_out)
+                categories = categoryExpenditure
+            }
+            else {
+                radio_group_operation_type.check(R.id.radio_operation_type_in)
+                categories = categoryProfit
+            }
+            var indexOfCategory = categories?.indexOfFirst { transaction.category == it }
+            if (indexOfCategory == null || indexOfCategory < 0) {
+                indexOfCategory = 0;
+            }
+            fragment_transaction_category.selectedIndex = indexOfCategory
+            var indexOfCurrency = currencyValues.indexOfFirst { transaction.currency == it}
+            if (indexOfCurrency == null || indexOfCurrency < 0) {
+                indexOfCurrency = 0;
+            }
+            fragment_transaction_currency.selectedIndex = indexOfCurrency
+            fragment_transaction_name.setText(transaction.name)
+            fragment_transaction_value.setText(String.format("%.2f", transaction.value).replace(",", "."))
+            fragment_transaction_date.setText(transaction.date)
+        }
     }
 
     private fun initComponentsListeners() {
@@ -82,6 +114,13 @@ class FragmentAddTransaction() : Fragment() {
             }
         }
 
+        button_delete_transaction.setOnClickListener {
+            alertConfirm(context!!, R.string.text_delete_confirm) {
+                mViewModel.deleteEditedTransaction()
+                fragmentManager?.popBackStackImmediate()
+            }
+        }
+
         fragment_wallets_ok.setOnClickListener {
             if (fragment_transaction_name.text.toString().isNotBlank()
                     && fragment_transaction_value.text.toString().isNotBlank()
@@ -90,14 +129,15 @@ class FragmentAddTransaction() : Fragment() {
                 var value = fragment_transaction_value.text.toString().toDouble()
                 if(radio_operation_type_out.isChecked) value = -value
                 if(fragment_transaction_currency.equals(currency.first())) value /= mViewModel.getUSD()
-                mViewModel.addTransaction(Transaction(
-                        fragment_transaction_name.text.toString(),
-                        radio_operation_type_out.isChecked,
-                        selectedCurrency,
-                        if (selectedCategory.isNotBlank()) selectedCategory else categories!![0],
-                        value,
-                        fragment_transaction_date.text.toString(),
-                ""))
+//                mViewModel.updateTransaction(editedTransaction)
+                mViewModel.updateTransaction(editedTransaction.copy(
+                        name = fragment_transaction_name.text.toString(),
+                        expenditure = radio_operation_type_out.isChecked,
+                        currency = selectedCurrency,
+                        category = if (selectedCategory.isNotBlank()) selectedCategory else categories!![0],
+                        value = value,
+                        date = fragment_transaction_date.text.toString()
+                        ))
                 fragmentManager?.popBackStackImmediate()
             }
         }

@@ -14,25 +14,10 @@
         android:minHeight="?attr/actionBarSize"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/add_transaction"
+        app:title="@string/edit_transaction"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="@android:color/white"
         />
-
-    <!--<TextView-->
-        <!--android:id="@+id/fragment_transaction_type_label"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/fragment_transaction_expendture"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/fragment_transaction_expendture"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:text="Расход"-->
-        <!--android:textSize="18sp"-->
-        <!--android:textColor="?android:textColorHint"/>-->
 
     <RadioGroup
         android:id="@+id/radio_group_operation_type"
@@ -72,17 +57,6 @@
 
     </RadioGroup>
 
-    <!--<CheckBox-->
-        <!--android:id="@+id/fragment_transaction_expendture"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_toolbar"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginStart="16dp"/>-->
-
-
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/fragment_transaction_category"
         android:layout_width="match_parent"
@@ -95,7 +69,6 @@
         app:layout_constraintTop_toBottomOf="@+id/radio_group_operation_type"
         app:ms_text_color="@color/colorAccent"
         />
-
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/fragment_transaction_name_label"
@@ -162,6 +135,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_value_label">
 
+        <!--todo -> TextInputEditText-->
         <EditText
             android:id="@+id/fragment_transaction_date"
             android:layout_width="match_parent"
@@ -176,6 +150,18 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:id="@+id/button_delete_transaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/text_delete_transaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_transaction_date_label"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fragment_wallets_ok"
@@ -186,6 +172,5 @@
         android:src="@drawable/ic_done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

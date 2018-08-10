@@ -6,4 +6,11 @@
     <dimen name="headline_text_size">24sp</dimen>
 
     <dimen name="text_view_regular_padding">8dp</dimen>
+
+    <dimen name="image_contact_size">50dp</dimen>
+    <dimen name="image_contact_inner_padding">10dp</dimen>
+
+    <dimen name="item_bg_highlight_padding">4dp</dimen>
+    <dimen name="item_bg_highlight_corner_radius">4dp</dimen>
+
 </resources>

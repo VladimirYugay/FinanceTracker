@@ -5,25 +5,24 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vladimir.financetracker.Constants
 import com.example.vladimir.financetracker.R
-import com.example.vladimir.financetracker.Routes
-import com.example.vladimir.financetracker.goTo
 import com.example.vladimir.financetracker.interfaces.IChangeFragmentCallback
-import com.example.vladimir.financetracker.model.entity.Wallet
 import com.example.vladimir.financetracker.view.activities.ActivityMain
-import com.example.vladimir.financetracker.view.adapters.AdapterWallets
+import com.example.vladimir.financetracker.view.adapters.WalletsRecyclerViewAdapter
 import com.example.vladimir.financetracker.viewmodel.FinanceTrackerViewModel
 import kotlinx.android.synthetic.main.fragment_wallets.*
 
 class FragmentWallets : Fragment() {
 
     private lateinit var mViewModel: FinanceTrackerViewModel
-    private lateinit var mWalletsAdapter: AdapterWallets
     private lateinit var mChangeFragmentCallback: IChangeFragmentCallback
+
+    private lateinit var mWalletsAdapter: WalletsRecyclerViewAdapter
+    private lateinit var mWalletsLayoutManager: LinearLayoutManager
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -48,38 +47,28 @@ class FragmentWallets : Fragment() {
 
     private fun observeViewModel() {
         mViewModel.observableWallets.observe(viewLifecycleOwner, Observer {
-            it?.forEach {
-                val fragment = FragmentWallet()
-                val bundle = Bundle()
-                bundle.putString(Constants.NAME, it.name)
-                bundle.putString(Constants.BALANCE, it.balance.toString())
-                fragment.arguments = bundle
-                mWalletsAdapter.addFragment(fragment)
-                mWalletsAdapter.notifyDataSetChanged()
-            }
+            mWalletsAdapter.setItems(it?.toList()!!)
         })
     }
 
     private fun initComponents() {
-        mWalletsAdapter = AdapterWallets(childFragmentManager)
-        view_pager_fragment_wallets.adapter = mWalletsAdapter
-        fragment_wallets_toolbar.inflateMenu(R.menu.menu_fragment_wallets)
+        mWalletsLayoutManager = LinearLayoutManager(context)
+        mWalletsAdapter = WalletsRecyclerViewAdapter {
+            mViewModel.changeWallet(it.name)
+        }
+        recycler_view_wallets.adapter = mWalletsAdapter
+        recycler_view_wallets.layoutManager = mWalletsLayoutManager
+
         observeViewModel()
     }
 
     private fun initComponentsListener() {
-
         fragment_wallets_toolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStack()
         }
 
-        fragment_wallets_toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.action_add_wallet) {
-                mChangeFragmentCallback.changeFragment(FragmentAddWallet())
-                true
-            } else {
-                false
-            }
+        fragment_wallets_ok.setOnClickListener {
+            mChangeFragmentCallback.changeFragment(FragmentAddWallet())
         }
     }
 }

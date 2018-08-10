@@ -14,7 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@android:color/white">
+        android:background="@drawable/bg_card_stroked"
+        android:foreground="?android:selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true"
+        >
 
         <TextView
             android:id="@+id/item_transactions_list_date"
@@ -31,6 +35,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/item_transactions_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{transaction.name}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/regular_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+            />
 
         <TextView
             android:id="@+id/item_transactions_list_value"
@@ -39,21 +58,22 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{String.valueOf(transaction.value)}"
+            android:text="@{transaction.formattedValue()}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/headline_text_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_name"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/item_transactions_list_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_clothes"
+            android:background="@drawable/bg_highlight_light"
+            android:text="@{transaction.category.toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_value" />
 
         <TextView
