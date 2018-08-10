@@ -34,6 +34,7 @@
             android:singleLine="true"
             android:ellipsize="marquee"
             android:textStyle="bold"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"/>
 
@@ -62,6 +63,7 @@
             android:ellipsize="marquee"
             android:layout_toEndOf="@+id/fragment_main_wallet_label"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"/>
 

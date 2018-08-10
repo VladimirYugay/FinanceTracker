@@ -2,12 +2,13 @@ package com.example.vladimir.financetracker
 
 import android.annotation.SuppressLint
 import android.content.Context
+import java.util.*
 
 class PreferencesUtils(context: Context) {
 
     companion object {
         private const val PREF_LANG = "lang"
-        private const val PREF_LANG_DEFAULT = "en"
+        private var PREF_LANG_DEFAULT = Locale.getDefault().getLanguage()
     }
 
     val prefs = context.getSharedPreferences("conf", Context.MODE_PRIVATE)
